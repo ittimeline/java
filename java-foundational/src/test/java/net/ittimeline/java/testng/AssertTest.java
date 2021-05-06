@@ -1,4 +1,4 @@
-package net.ittimeline.java.api.testng;
+package net.ittimeline.java.testng;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

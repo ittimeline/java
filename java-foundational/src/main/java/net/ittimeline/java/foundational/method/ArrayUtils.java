@@ -16,7 +16,7 @@ public class ArrayUtils {
      * @param numbers
      */
     public static void bubbleSort(int[] numbers){
-        System.out.println("冒泡排序之前的结果是" + Arrays.toString(numbers));
+      //  System.out.println("冒泡排序之前的结果是" + Arrays.toString(numbers));
 
         int count = 0;
 
@@ -37,9 +37,9 @@ public class ArrayUtils {
             }
 
             count++;
-            System.out.println("第" + count + "轮排序的结果" + Arrays.toString(numbers));
+          //  System.out.println("第" + count + "轮排序的结果" + Arrays.toString(numbers));
         }
-        System.out.println("冒泡排序之后的结果是" + Arrays.toString(numbers));
+       // System.out.println("冒泡排序之后的结果是" + Arrays.toString(numbers));
     }
 
 
