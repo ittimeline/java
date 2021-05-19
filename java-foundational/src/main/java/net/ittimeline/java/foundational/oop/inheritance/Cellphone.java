@@ -139,10 +139,15 @@ public   class Cellphone {
         color=colorArgs;
     }
 
+    @Override
+    public String toString() {
+        return "Cellphone{" +
+                "model='" + model + '\'' +
+                '}';
+    }
 
 
-
-    /**********************成员方法**********************/
+/**********************成员方法**********************/
 
     /**
      * 给指定的手机号打电话

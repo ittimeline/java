@@ -30,7 +30,7 @@ public class SmartPhone extends  Cellphone{
         super();
     }
 
-    SmartPhone(String model){
+   public  SmartPhone(String model){
         //调用父类带一个参数的构造方法
         super(model);
 
