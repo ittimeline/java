@@ -3,6 +3,7 @@ package net.ittimeline.java.api.util;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 
 import java.text.DateFormat;
@@ -131,6 +132,16 @@ public class DateTimeUtils {
     public static String date2UtcTime(Date date ){
         DateTime dateTime=new DateTime(date, DateTimeZone.UTC);
         return dateTime.toString();
+
+    }
+
+    /**
+     * 获取当前时间
+     * @return
+     */
+    public static String getCurrentTime(){
+        LocalTime localTime=LocalTime.now();
+        return localTime.toString(STANDARD_TIME_FORMAT);
 
     }
 
