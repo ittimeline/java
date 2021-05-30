@@ -1,5 +1,6 @@
 package net.ittimeline.java.foundational.oop;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -9,7 +10,9 @@ import java.util.Objects;
  * @version 2021/4/15 9:19
  * @since JDK11
  */
-public class Cellphone implements Comparable<Cellphone> {
+public class Cellphone implements Comparable<Cellphone>, Serializable {
+
+    static final long serialVersionUID = 88888888L;
 
     /**********************成员变量**********************/
 
@@ -28,7 +31,7 @@ public class Cellphone implements Comparable<Cellphone> {
     /**
      * 价格
      */
-    Integer price;
+    transient  Integer price;
 
 
     /**
@@ -42,6 +45,9 @@ public class Cellphone implements Comparable<Cellphone> {
      * 手机重量
      */
     private Integer weight;
+
+
+    private Integer pixel;
 
 
     public Integer getWeight() {
@@ -198,6 +204,8 @@ public class Cellphone implements Comparable<Cellphone> {
                 "型号:'" + model + '\'' +
                 ", 价格:" + price +
                 ", 重量:" + weight +
+                ", 品牌:" + brand +
+                ", 颜色:" + color +
                 '}';
     }
 
