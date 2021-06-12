@@ -198,6 +198,11 @@ public class Cellphone implements Comparable<Cellphone>, Serializable {
     }
 
 
+    public static void getSerialVersionUID(){
+        System.out.println(serialVersionUID);
+    }
+
+
     @Override
     public String toString() {
         return "手机信息{" +
