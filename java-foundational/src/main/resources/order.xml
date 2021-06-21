@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--Schema约束的使用-->
+<orders
+        xmlns="https://www.ittimeline.net"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://www.ittimeline.net  order.xsd"
+>
+    <order orderId="10001">
+        <id>10001</id>
+        <address>上海市黄浦区</address>
+        <bookTime>2021-06-20T08:00:00</bookTime>
+        <amount>8888.88</amount>
+    </order>
+
+    <order orderId="10002">
+        <id>10002</id>
+        <address>上海市长宁区</address>
+        <bookTime>2021-06-20T08:00:00</bookTime>
+        <amount>8888.88</amount>
+    </order>
+
+
+    <order orderId="10003">
+        <id>10003</id>
+        <address>上海市静安区</address>
+        <bookTime>2021-06-20T08:00:00</bookTime>
+        <amount>8888.88</amount>
+    </order>
+</orders>

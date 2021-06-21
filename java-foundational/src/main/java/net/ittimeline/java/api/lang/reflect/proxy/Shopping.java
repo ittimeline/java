@@ -1,4 +1,4 @@
-package net.ittimeline.java.api.lang.reflect;
+package net.ittimeline.java.api.lang.reflect.proxy;
 
 /**
  * 代理模式的协议

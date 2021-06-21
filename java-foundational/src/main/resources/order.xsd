@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+ xmlns:xs="http://www.w3.org/2001/XMLSchema" 表示标准命名空间 每个Schema约束都会包含一个标准命名空间
+  targetNamespace="www.ittimeline.net" 表示目标命名空间(自定义命名空间)
+
+-->
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="https://www.ittimeline.net"
+        elementFormDefault="qualified"
+>
+
+<!--    将Schema约束绑定到目标命名空间-->
+
+<!--    定义Schema约束-->
+    <!--
+        orders是xml文件的根标签
+
+    -->
+    <xs:element name="orders">
+        <!--   complexType表示orders标签是复杂标签
+                orders标签是复杂标签，即可以包含其他子标签
+             -->
+        <xs:complexType>
+            <!--
+                sequence表示按照顺序出现
+                  maxOccurs 表示最大出现次数
+                  minOccurs 表示最小出现次数
+              -->
+            <xs:sequence maxOccurs="3" minOccurs="1">
+                <!--                orders标签下的子标签是order-->
+                <xs:element name="order">
+                    <!--                    order标签也是复杂标签-->
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="id" type="xs:unsignedInt"/>
+                            <xs:element name="address" type="xs:string"/>
+                            <xs:element name="bookTime" type="xs:dateTime"/>
+                            <xs:element name="amount" type="xs:double"/>
+                        </xs:sequence>
+
+                        <!--
+                        order标签必须包含orderId属性，该属性类型是无符号整数，而且必须定义
+                        required表示必须定义
+                         optional表示可选的
+                        -->
+                        <xs:attribute name="orderId" type="xs:unsignedInt" use="required"/>
+
+
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+
+    </xs:element>
+
+
+</xs:schema>

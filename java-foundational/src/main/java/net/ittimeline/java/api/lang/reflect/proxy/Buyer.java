@@ -1,4 +1,4 @@
-package net.ittimeline.java.api.lang.reflect;
+package net.ittimeline.java.api.lang.reflect.proxy;
 
 /**
  * 代理模式的代理角色
@@ -13,7 +13,7 @@ public class Buyer implements Shopping{
 
     final User user;
 
-    Buyer(final User user){
+    public Buyer(final User user){
         this.user=user;
     }
 

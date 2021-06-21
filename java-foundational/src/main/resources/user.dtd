@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--约束标签的层级关系-->
+<!--定义users标签为根标签，该标签下至少有1个user标签-->
+<!ELEMENT users (user+)>
+<!--user标签下必须有三个指定顺序的子标签:id,name,password-->
+<!ELEMENT  user (id,name,password,salary)>
+
+<!--约束标签-->
+<!-- id name password 这三个标签的标签类型都是字符串-->
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT password (#PCDATA)>
+<!ELEMENT salary (#PCDATA)>
+
+<!--约束标签的属性-->
+<!--
+    user标签必须包含id属性，属性类型是ID，属性约束是#REQUIRED
+    user标签必须包含country属性，属性类型是CDATA，属性约束是#IMPLIED
+    user标签必须包含platform属性，属性类型是CDATA，属性约束是#FIXED
+    user标签必须包含source属性，属性类型是枚举，默认值是Android
+
+-->
+<!ATTLIST user
+        id ID #REQUIRED
+        country CDATA #IMPLIED
+        platform CDATA #FIXED "ittimeline"
+        source (Android|iOS|PC|WeChat) "Android"
+
+        >

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE users  SYSTEM "user.dtd">
+
+<!--
+
+定义根标签是users
+
+-->
+<users>
+    <user id="TB10001" country="Chinese" >
+        <id>10001</id>
+        <name>admin</name>
+        <password>111111</password>
+        <salary>salary > 15000 &amp; salary &lt; 30000</salary>
+    </user>
+
+    <user id="TB10002" country="Chinese" source="PC">
+        <id>10002</id>
+        <name>tony</name>
+        <password>666666</password>
+        <salary>
+            <![CDATA[
+                salary > 15000 & salary < 30000
+            ]]>
+
+        </salary>
+
+    </user>
+</users>

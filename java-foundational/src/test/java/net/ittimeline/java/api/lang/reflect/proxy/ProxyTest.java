@@ -1,5 +1,8 @@
-package net.ittimeline.java.api.lang.reflect;
+package net.ittimeline.java.api.lang.reflect.proxy;
 
+import net.ittimeline.java.api.lang.reflect.proxy.Buyer;
+import net.ittimeline.java.api.lang.reflect.proxy.Shopping;
+import net.ittimeline.java.api.lang.reflect.proxy.User;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.InvocationHandler;
