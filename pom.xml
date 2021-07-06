@@ -6,7 +6,11 @@
 
     <groupId>net.ittimeline.java</groupId>
     <artifactId>java</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-20210306-SNAPSHOT</version>
+    <modules>
+        <module>java-web-foundational</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
