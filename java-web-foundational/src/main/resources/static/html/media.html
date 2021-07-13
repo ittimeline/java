@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML的常用标签-媒体标签</title>
+</head>
+<body>
+<!--
+
+    音频标签 使用<audio></audio>表示，用于播放声音，是HTML5新增的标签
+    常用的属性
+    src 表示音频的资源
+    controls 表示显示播放控件，比如播放按钮
+    loop表示循环播放
+    preload 表示音频在页面加载进行预加载
+    autoplay表示音频在准备就绪之后自动播放
+-->
+
+<audio src="../media/风的季节.flac" controls>
+    你的浏览器不支持音频标签
+</audio>
+
+<!--
+    视频标签使用video表示
+    视频标签的常用属性
+    src 表示视频的路径
+    width 设置视频播放器的宽度
+    controls 表示显示播放控件，比如播放按钮
+    muted 表示播放视频时音频输出会静音
+-->
+
+<video src="../media/technology.mp4" controls  muted   width="600px" height="600px">
+    你的浏览器不支持视频标签
+</video>
+
+</body>
+</html>

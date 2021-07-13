@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之BOM编程篇-window对象-定时任务</title>
+</head>
+<body>
+
+
+<script>
+  //使用window对象实现两种定时器
+
+  //第一种实现 只会执行一次的定时任务
+  // 2秒钟之后在页面上打印输出Hello JavaScript
+  window.setTimeout(function (){
+    //页面上打印输出Hello JavaScript
+    document.write("Hello JavaScript<br/>")
+  },100)
+
+  //第二种实现 每隔指定的时间执行一次,执行的次数没有限制
+  //每隔1秒钟在页面上打印输出跟光磊学Java并换行,一共打印八次
+
+  let count =0
+  let interval = window.setInterval(function (){
+    //页面上打印输出跟光磊学Java
+    document.write("跟光磊学Java<br/>")
+    count++
+    //如果次数到达了8次，就停止执行定时任务
+    if (count==8){
+      window.clearInterval(interval)
+    }
+
+  },1000);
+
+
+</script>
+</body>
+</html>

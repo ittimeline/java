@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript事件的使用-快速体验</title>
+</head>
+<body>
+
+<input type="button" value="按钮"  onclick="handleOnclick()"/> <br/>
+
+<input type="button" id="baidu" value="百度一下，你就知道"/>
+
+
+<script>
+
+  //点击按钮就会触发该方法
+  function handleOnclick(){
+    console.log("按钮被点击")
+
+  }
+  /*
+      HTML页面加载完成之后会调用
+   */
+  window.onload=function (){
+    //修改元素的样式
+    document.getElementById("baidu").style.backgroundColor="yellow"
+  }
+
+
+</script>
+</body>
+</html>

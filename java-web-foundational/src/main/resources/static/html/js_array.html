@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之基础语法篇JavaScript内置对象-数组</title>
+</head>
+<body>
+
+
+<script>
+  //数组的创建
+  let array=["Java",100,"Python",90,"Go",95]
+  //数组的遍历
+  console.log("数组的遍历")
+  for (let i = 0; i <array.length ; i++) {
+    console.log(array[i])
+  }
+
+  left=["Java","Python","Go"]
+  right=[100,90,95]
+  //将left和right拼接成一个新数组result
+  let result = left.concat(right);
+  console.log("result数组的遍历")
+  for (let i = 0; i <result.length ; i++) {
+    console.log(result[i])
+  }
+
+  //数组的元素按照指定的规则拼接成字符串
+  let str = left.join(",");
+  console.log("数组按照指定的规则拼接成字符串的结果"+str)
+
+  //二维数组的创建和遍历
+  cities=[["北京","上海"],["广州","深圳"]]
+  console.log("二维数组的遍历")
+  for (let i = 0; i <cities.length ; i++) {
+    for (let j = 0; j <cities[i].length ; j++) {
+      console.log(cities[i][j])
+    }
+  }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之DOM编程篇-获取元素</title>
+</head>
+<body>
+<!--准备数据-->
+<div id="java">跟光磊学Java</div>
+<div class="javascript">跟光磊学前端</div>
+<span name="front" class="javascript">HTML</span>
+<span name="front" class="javascript">CSS</span>
+<span name="front" class="javascript">JavaScript</span>
+
+<script>
+  //根据id获取一个元素 返回Element
+  console.log("根据id获取一个元素 返回Element")
+  let divElement = document.getElementById("java");
+  console.log(divElement)
+
+  //根据class获取多个元素 返回Element类型的数组
+  console.log("根据class获取多个元素 返回Element类型的数组")
+  let javaScriptClassElements = document.getElementsByClassName("javascript");
+  for (let i = 0; i <javaScriptClassElements.length ; i++) {
+    console.log(javaScriptClassElements[i])
+  }
+
+  //根据name获取多个元素 返回Element类型的数组
+  console.log("根据name获取多个元素 返回Element类型的数组")
+  let frontNameElements = document.getElementsByName("front");
+  for (let i = 0; i <frontNameElements.length ; i++) {
+    console.log(frontNameElements[i])
+  }
+  //根据标签获取多个元素 返回Element类型的数组
+  console.log("根据标签获取多个元素 返回Element类型的数组")
+  let spanTagElements = document.getElementsByTagName("span");
+  for (let i = 0; i <spanTagElements.length ; i++) {
+    console.log(spanTagElements[i])
+  }
+
+  //获取单个元素
+  console.log("获取单个元素")
+  let querySelector = document.querySelector("#java");
+  console.log(querySelector)
+
+  //获取多个元素
+  console.log("获取多个元素")
+  let elementNodeListOf = document.querySelectorAll(".javascript");
+
+  for (let i = 0; i <elementNodeListOf.length ; i++) {
+    console.log(elementNodeListOf[i])
+  }
+
+</script>
+</body>
+</html>

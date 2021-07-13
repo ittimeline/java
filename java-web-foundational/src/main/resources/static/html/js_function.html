@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之基础语法篇-函数-普通函数</title>
+</head>
+<body>
+
+
+<script>
+
+  /**
+   * 求两个数的和
+   * @param left
+   * @param right
+   * @returns {*}
+   */
+  function sum(left,right){
+    console.log("left = "+left)
+    console.log("right = "+right)
+    return left+right
+  }
+
+
+  // JavaScript的函数不支持重载
+
+  function sum(left,right,middle){
+    console.log("arguments = "+arguments)
+    console.log("left = "+left)
+    console.log("right = "+right)
+    console.log("middle = "+middle)
+    return left+right+middle
+  }
+
+  //此处调用的是接收三个参数的sum方法
+  // 函数的参数值存储在arguments数组中
+  let result=sum(10,20)
+  console.log("result = "+result)
+
+</script>
+</body>
+</html>

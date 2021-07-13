@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS样式引入的三种方式</title>
+
+<!--
+
+
+    内部样式
+    内部样式是在当前HTML文档内部(一般是在head标签中)编写一个style标签，然后在style标签中编写CSS代码
+    优点:可以在当前HTML页面使用
+    缺点:不太直观
+
+-->
+    <style type="text/css" rel="stylesheet">
+        div{
+            /*设置字体大小是28px*/
+            font-size: 28px;
+            color: cyan;
+
+        }
+    </style>
+
+<!--
+
+    引入外部样式
+    href指定外部样式的路径
+    rel描述HTML页面和CSS文件的关系：样式表
+
+    外部样式是作用于当前项目的所有的HTML页面的元素，哪个页面需要使用，使用link标签引入即可
+    优点:复用性最强
+
+-->
+<link href="../css/css_usage.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!--
+  行内样式: 就是要在修改样式的标签上添加style属性，然后编写CSS样式
+  优点:直观
+  缺点:只能作用当前的标签
+
+-->
+<h1 style="font-size:14px; color: coral ">跟光磊学Java-使用CSS美化网页</h1>
+
+<div>
+    跟光磊学前端
+</div>
+
+<div>
+    跟光磊学Java
+</div>
+
+<span>跟光磊学Linux</span>
+
+</body>
+</html>

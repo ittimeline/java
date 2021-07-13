@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之综合案例篇-轮播图</title>
+</head>
+<body>
+
+<h1>JavaScript编程之综合案例篇-轮播图</h1>
+<img src="../images/xiaomi11ultra.jpg" id="phoneImage" onmouseover="pause()" onmouseout="startChangeImg()">
+
+<script>
+    //使用数组保存三张图片的地址
+    let phoneImageUrlArray = ["../images/xiaomi11ultra.jpg",
+        "../images/mate40pro.jpg", "../images/iphone12promax.jpg"]
+
+
+    let interval
+
+    /**
+     * 鼠标放到图片上暂停轮播
+     */
+    function pause() {
+        //清除定时器
+        window.clearInterval(interval)
+    }
+
+
+    /**
+     * 鼠标指针从图片上移开之后又开始轮播
+     */
+    function startChangeImg() {
+        //轮播图就是定时换图片
+        let i = 0;
+        interval = window.setInterval(function () {
+            let imgElement = document.getElementById("phoneImage");
+            imgElement.setAttribute("src", phoneImageUrlArray[i])
+            i++
+            if (i == 3) {
+                i = 0;
+            }
+        }, 2000);
+    }
+
+    //打开页面2秒后开始轮播
+    startChangeImg()
+
+
+</script>
+</body>
+</html>

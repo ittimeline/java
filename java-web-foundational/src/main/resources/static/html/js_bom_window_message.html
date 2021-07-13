@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之BOM编程篇-window对象-消息框</title>
+</head>
+<body>
+
+
+<script>
+  //使用window对象弹框，可以实现三种方式的弹框，不同的浏览器的弹框效果不一样
+
+  //方式1:警告框
+  alert("警告框")
+
+  //方式2 消息确认框 做二次确认使用 该方法会返回一个布尔类型的值
+  let result = window.confirm("是否确认删除")
+  console.log("确认删除的结果是"+result)
+
+  //方式3消息输入框
+  let age = window.prompt("请输入你的年龄");
+  if (age>=18){
+    alert('你可以去网吧上网了')
+  }else{
+    alert("好好学习吧")
+  }
+
+
+
+</script>
+</body>
+</html>

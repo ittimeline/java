@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之DOM编程篇-修改标签的属性</title>
+</head>
+<body>
+密码:<input type="password" id="password" ><br/>
+
+<!--
+    onmousedown 当鼠标按钮被点击之后事件触发
+    onmouseup 当鼠标按钮松开之后事件触发
+-->
+<input type="button" value="显示密码" onmousedown="showPassword()"/>
+<input type="button" value="隐藏密码" onmouseup="hidePassword()"/>
+
+<script>
+  //鼠标按钮被点击时显示密码
+
+  /*
+    显示密码
+  */
+  function showPassword(){
+      let inputElement = document.getElementById("password");
+      inputElement.setAttribute("type","text")
+
+  }
+  /*
+    隐藏密码
+   */
+  function hidePassword(){
+    let inputElement = document.getElementById("password");
+    inputElement.setAttribute("type","password")
+  }
+
+
+</script>
+</body>
+</html>

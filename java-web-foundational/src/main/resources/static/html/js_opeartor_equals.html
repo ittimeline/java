@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之基础语法篇-JavaScript中的相等性判断</title>
+</head>
+<body>
+
+
+<script>
+    /*
+        JavaScript也可以使用==和===做相等性判断
+        ==和!= 只会比较数值，忽略类型差异
+        ===和 !== 恒等与 同时比较类型和数字是否相等
+     */
+    value=3.14
+    str="3.14"
+
+    console.log("value ="+value+" value的类型是"+typeof value)
+    console.log("str ="+str+" str的类型是"+typeof str)
+    //比较结果是true,因为忽略类型，只会比较数值是否相等
+    console.log("==比较的结果是"+(value==str))
+    console.log("===比较的结果是"+(value===str))
+
+
+
+</script>
+</body>
+</html>

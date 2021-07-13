@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之BOM编程篇-location对象</title>
+</head>
+<body>
+
+
+<script>
+  // 需求:3秒钟之后跳到淘宝网(只需要跳一次)
+  window.setTimeout(function (){
+    //跳转之前的地址
+    alert(location.href)
+    location.href="https://www.taobao.com"
+  },3000)
+
+
+</script>
+</body>
+</html>

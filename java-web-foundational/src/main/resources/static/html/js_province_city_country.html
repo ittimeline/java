@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之综合案例篇-省市区级联</title>
+</head>
+<body>
+
+<h1>JavaScript编程之综合案例篇-省市区级联</h1>
+<div>
+  <select id="provinceSelect" onchange="getCities(this.value)">
+    <option value="0" selected>请选择省份</option>
+  </select>
+  <select id="citySelect" onchange="getCountries(this.value)">
+    <option value="0" selected>请选择城市</option>
+  </select>
+
+  <select id="countrySelect">
+    <option value="0" selected>请选择区县</option>
+  </select>
+</div>
+
+<script src="../js/js_province_city_country.js">
+</script>
+</body>
+</html>

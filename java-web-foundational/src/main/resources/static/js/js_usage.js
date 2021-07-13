@@ -1,0 +1,1 @@
+alert("外联式 Hello JavaScript")

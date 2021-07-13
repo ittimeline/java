@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML常用标签-表单标签</title>
+</head>
+<body>
+
+<!--
+    表单标签的介绍
+    表单标签和之前学习的标签作用不同
+    之前学习的标签都是用来展示数据(例如表格，列表)
+    而表单是可以让用户输入数据并且提交到指定的服务器后台，例如用户在登录、注册、修改数据时都要数据相关的数据。
+    表单是HTML标签中最最重要的标签
+
+    表单标签的组成
+    表单标签由表单和表单项组成
+
+    表单
+    表单是使用<form></form>标签表示,
+    表单标签的action属性决定了往哪个服务器路径提交数据
+    表单标签的method属性决定了采用什么方式提交数据，get还是post
+    表单标签的enctype属性决定了表单采用什么数据类型(数据格式)提交数据
+
+    常用的表单项如下所示
+    输入框
+    按钮
+    下拉框
+    单选框
+    多选框
+    文件上传组件
+    文本域
+
+    表单项的常用属性说明
+    name属性，只有当一个表单项设置了name属性之后，表单项的数据才能提交到服务器，而且表单项的数据都是以name=value的形式提交
+    value属性 对于按钮而言就是按钮上的文字，对于文本框、密码框、日期选择框而言value就是用户输入或者选择的内容
+    对应单选框、多选框value默认值是on,因此需要手动设置value
+
+    readonly属性表示只读属性，也就是说数据不能修改，但是数据还是可以提交给服务器。
+    placeholder 表示输入框的提示信息
+
+-->
+
+<!--
+
+get请求的数据https://www.baidu.com/?gender=%E7%94%B7&hobby=%E6%97%85%E6%B8%B8&email=18601767221%40163.com&phone=18601767221&date=2021-07-10&icon=falali.png&edu=%E6%9C%AC%E7%A7%91&comments=%E7%88%B1%E5%A5%BD%E7%BC%96%E7%A8%8B
+
+post请求和get请求的区别
+1. 携带数据的位置不同：get请求的数据放在URL后面，post请求将请求数据放在HTTP协议的请求中
+2.携带数据的数据类型不同，get请求只能携带文本数据，post请求可以携带任意类型的数据，例如图片、视频、音频，因此文件上传只能用post
+3.携带数据的大小不同，get请求只能携带少量数据，post请求携带数据的大小没有限制，但是服务器后台会限制post请求数据的大小，例如上传图片不能大于5M
+4.post请求的安全性高于get请求
+-->
+<form action="https://www.baidu.com"  method="get" enctype="application/x-www-form-urlencoded">
+
+<!--  type为text表示文本框-->
+  用户名:<input type="text" /><br/>
+<!--  type为password表示密码框-->
+  密码:<input type="password" placeholder="密码长度必须是6-18位"/><br/>
+<!--  type为radio表示单选框，如果想要有单选的效果，多个单选框要设置相同的name ，而且必须设置value-->
+  性别:<input type="radio" name="gender" value="男"/> 男 <input type="radio" name="gender"  value="女"/> 女 <br/>
+
+  <!--  type为checkbox表示多选框，如果想要有多选的效果，多个复选框要设置相同的name，而且必须设置value -->
+  兴趣爱好: <input type="checkbox" name="hobby" value="旅游">旅游
+          <input type="checkbox" name="hobby" value="摄影">摄影
+          <input type="checkbox" name="hobby" value="读书">读书 <br/>
+  邮箱: <input type="email" name="email"/> <br/>
+  手机号: <input type="number" name="phone"/> <br/>
+  出生日期: <input type="date" name="date"/> <br/>
+  头像:<input type="file" name="icon" /><br/>
+<!--  select必须有name属性-->
+  学历: <select name="edu">
+<!--  option必须要有value属性-->
+<!--  下拉框默认选中第一个option,可以在option中添加selected属性改变默认选项-->
+      <option value="高中">高中</option>
+      <option value="大专">大专</option>
+      <option value="本科" selected>本科</option>
+      <option value="研究生">研究生</option>
+      <option value="博士">博士</option>
+</select> <br/>
+<!-- 文本域使用textarea表示 rows表示文本的行 cols表示文本的列 必须要有name属性-->
+  个人经历: <textarea rows="20" cols="50" name="comments" ></textarea><br/><br/><br/>
+
+<!--   type为submit表示提交按钮，点击之后会将请求的数据提交到指定的服务器地址-->
+  <input type="submit" value="提交"/>
+
+
+
+</form>
+
+</body>
+</html>

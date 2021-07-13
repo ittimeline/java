@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之DOM编程篇-修改元素</title>
+</head>
+<body>
+
+<!--
+  准备数据
+-->
+<ul id="cities">
+  <li id="beijing">
+    北京
+  </li>
+  <li id="shanghai">
+    上海
+  </li>
+  <li id="guangzhou">
+    广州
+  </li>
+  <li id="shenzhen">
+    深圳
+  </li>
+
+
+
+
+</ul>
+
+<input type="button" value="添加城市" onclick="addCity()"><br/>
+<input type="button" value="删除城市" onclick="removeCity('hangzhou')"><br/>
+
+
+<script>
+  function addCity(){
+    //在列表中添加一个杭州
+
+    //1.创建一个li标签
+    let liElement = document.createElement("li")
+    //给li标签设置id属性
+    liElement.setAttribute("id","hangzhou")
+    //设置li标签的文本内容
+    liElement.innerText="杭州"
+    //根据id找到ul标签
+    let ulElement = document.getElementById("cities");
+    //将il标签添加到ul标签中
+    ulElement.appendChild(liElement)
+  }
+
+  function removeCity(cityId){
+    //根据id找到元素
+    let removeElement = document.getElementById(cityId);
+    //删除元素
+    removeElement.remove()
+
+  }
+
+
+
+</script>
+</body>
+</html>

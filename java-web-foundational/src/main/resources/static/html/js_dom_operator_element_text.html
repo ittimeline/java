@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之DOM编程篇-修改标签的内容</title>
+</head>
+<body>
+
+<div id="city"><h1>上海</h1></div>
+
+
+<script>
+  //获取文本内容
+  //需求 想要获取城市的名称
+  let innerText = document.getElementById("city").innerText;
+  console.log("城市名称是"+innerText)
+
+  //修改文本内容
+  document.getElementById("city").innerHTML="<h1>深圳</h1>";
+
+
+</script>
+</body>
+</html>

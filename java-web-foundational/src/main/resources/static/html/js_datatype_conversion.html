@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript编程之基础语法篇-数据类型转换</title>
+</head>
+<body>
+
+<script>
+  let  value=100
+  console.log("value ="+value+" value的类型是"+typeof value)
+  //使用拼接字符串或者调用toString()方法将value转换成字符串类型
+  value=value+""
+  console.log("value ="+value+" value的类型是"+typeof value)
+
+  //字符串转number
+  let str="3.14"
+  value = parseInt(str);
+  console.log("value ="+value+" value的类型是"+typeof value)
+
+  value = parseFloat(str);
+  console.log("value ="+value+" value的类型是"+typeof value)
+
+  //字符串转换为boolean类型
+  str=""
+  console.log("空字符串转为boolean = "+new Boolean(str))
+  str="0"
+  console.log("空字符串转为boolean = "+new Boolean(str))
+
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CSS常用选择器-属性选择器</title>
+    <style type="text/css" rel="stylesheet">
+        /*
+            在CSS中不要使用HTML的注释，否则会出现错误
+            如果想用使用注释，可以使用Java的多行注释
+         */
+        a[target] {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+
+<h1>CSS [attribute] 选择器</h1>
+
+<p>带有 target 属性的链接获得颜色背景：</p>
+
+<a href="https://www.w3school.com">w3school.com.cn</a>
+<a href="http://www.disney.com" target="_blank">disney.com</a>
+<a href="http://www.wikipedia.org" target="_top">wikipedia.org</a>
+
+</body>
+</html>
