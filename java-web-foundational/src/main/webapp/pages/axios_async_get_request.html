@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Axios发送异步Get请求</title>
+  <script src="../js/axios.js"></script>
+  <script src="../js/vue.js"></script>
+
+</head>
+
+<body>
+<h1>Axios发送异步Get请求</h1>
+<div id="app">
+  <div v-html="message"></div>
+
+</div>
+<script>
+
+  let vm=new Vue({
+    el:"#app",
+    data:{
+      message:"hello,vue"
+    },
+    created(){
+   /*   axios.get("../axios?name=tony&password=1111").then(function (response){
+        console.log("response ="+response)
+
+        //不能使用this关键字
+        //this.message=response.data;
+
+        //获取服务器响应的数据并且赋值给数据模型
+        vm.message=response.data;
+        console.log("response.data ="+response.data)
+
+      })*/
+
+/*      //axios发送get请求，请求参数通过url携带请求数据
+      axios.get("../axios?name=tony&password=111111").then((response)=>{
+        this.message=response.data;
+        console.log("response.data ="+response.data)
+
+      })*/
+
+      // axios发送get请求，请求参数是通过JSON携带请求数据
+      axios.get("../axios",{
+        params:{
+          name:"jack",
+          password:"111111"
+        }
+      }).then((response)=>{
+        this.message=response.data;
+        console.log("response.data ="+response.data)
+      })
+
+
+    }
+  })
+
+</script>
+</body>
+</html>

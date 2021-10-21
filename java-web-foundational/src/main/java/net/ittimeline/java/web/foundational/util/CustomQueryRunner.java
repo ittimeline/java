@@ -27,7 +27,7 @@ public class CustomQueryRunner {
      * @param params
      * @return
      */
-    public int update(String sql, Object... params) {
+    public int update(String sql, Object... params) throws SQLException {
         if (null != dataSource && sql != null && sql != "") {
             try (
                     Connection connection = dataSource.getConnection();
@@ -44,8 +44,39 @@ public class CustomQueryRunner {
                 }
                 int row = preparedStatement.executeUpdate();
                 return row;
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (SQLException ex) {
+                throw  new SQLException(ex.getMessage());
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 数据的增删改
+     *
+     * @param connection
+     * @param sql
+     * @param params
+     * @return
+     */
+    public int update(Connection connection ,String sql, Object... params) throws SQLException {
+        if (null != dataSource && sql != null && sql != "") {
+            try (
+                    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            ) {
+                //获取SQL参数的元数据
+                ParameterMetaData parameterMetaData = preparedStatement.getParameterMetaData();
+                int parameterCount = parameterMetaData.getParameterCount();
+
+                //给占位的参数设值
+                for (int i = 1; i <= parameterCount; i++) {
+                    preparedStatement.setObject(i, params[i - 1]);
+                }
+                int row = preparedStatement.executeUpdate();
+                return row;
+            } catch (SQLException ex) {
+                throw new SQLException(ex.getMessage());
             }
         }
         return -1;
@@ -60,7 +91,7 @@ public class CustomQueryRunner {
      * @param <T>
      * @return
      */
-    public <T> T queryForType(String sql, Class<T> clazz, Object... params) {
+    public <T> T queryForType(String sql, Class<T> clazz, Object... params) throws SQLException {
         if (null != dataSource && sql != null && sql != "") {
             try (
                     Connection connection = dataSource.getConnection();
@@ -77,8 +108,8 @@ public class CustomQueryRunner {
                     T result = resultSet.getObject(1, clazz);
                     return result;
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (SQLException ex) {
+                throw new SQLException(ex.getMessage());
             }
         }
         return null;
@@ -93,8 +124,9 @@ public class CustomQueryRunner {
      * @param params 查询条件的参数
      * @param <T>    泛型类型
      * @return 返回类型是一个泛型类型
+     * @throws Exception
      */
-    public <T> T queryForObject(String sql, Class<T> clazz, Object... params) {
+    public <T> T queryForObject(String sql, Class<T> clazz, Object... params) throws Exception {
         if (null != dataSource && null != sql && sql != "") {
             try (
                     Connection connection = dataSource.getConnection();
@@ -141,7 +173,7 @@ public class CustomQueryRunner {
                 }
                 return instance;
             } catch (Exception ex) {
-                ex.printStackTrace();
+                throw new Exception(ex.getMessage());
             }
         }
         return null;
@@ -174,8 +206,8 @@ public class CustomQueryRunner {
         }
         return false;
     }
-    /**
-     * 查询结果是多条记录(多行多列)
+    /**     * 查询结果是多条记录(多行多列)
+
      *
      * @param sql
      * @param clazz  对象类型
@@ -184,7 +216,7 @@ public class CustomQueryRunner {
      * @return 返回类型是一个泛型类型
      * @return
      */
-    public <T> List<T> queryForList(String sql, Class<T> clazz, Object... params) {
+    public <T> List<T> queryForList(String sql, Class<T> clazz, Object... params) throws Exception{
         if (null != dataSource && null != sql && sql != "") {
             try (
                     Connection connection = dataSource.getConnection();
@@ -237,7 +269,7 @@ public class CustomQueryRunner {
                     return result;
                 }
             } catch (Exception ex) {
-                ex.printStackTrace();
+                throw new Exception(ex.getMessage());
             }
         }
         return null;

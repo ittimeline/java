@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery实现页面定时弹广告</title>
+    <!--  引入外部jQuery的js文件-->
+    <script src="../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<h1>jQuery实现页面定时弹广告</h1>
+<!--页面加载的时候不显示图片-->
+<div id="ad" style="display: none"><img src="../images/ad.png"/> </div>
+<script>
+
+    //需求 页面加载完成3秒钟以后弹个广告(显示一张图片)，广告的本质就是图片，广告显示3秒钟以后隐藏
+
+    /**
+     * 显示广告
+     */
+    function showAd(){
+        $("#ad").slideDown(3000,function (){
+            //当广告显示出来隔了3秒钟以后就隐藏
+            setTimeout(hideAd,3000)
+
+
+        })
+
+}
+
+    /**
+     * 隐藏广告
+     */
+    function hideAd(){
+        $("#ad").slideUp(2000)
+
+}
+
+//页面加载完成之后3秒钟显示广告
+    setTimeout(showAd,3000)
+
+
+
+</script>
+</body>
+</html>

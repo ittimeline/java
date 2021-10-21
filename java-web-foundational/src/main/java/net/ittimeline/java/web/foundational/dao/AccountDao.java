@@ -1,8 +1,9 @@
 package net.ittimeline.java.web.foundational.dao;
 
-import net.ittimeline.java.web.foundational.entity.Account;
-import net.ittimeline.java.web.foundational.bo.AccountBO;
+import net.ittimeline.java.web.foundational.bean.entity.Account;
 
+import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -14,18 +15,97 @@ import java.util.List;
  */
 public interface AccountDao {
 
-    /**
-     * 更新转账的两个账户
-     * @param sourceAccount 借款人
-     * @param targetAccount 收款人
-     * @return
-     */
-     boolean update(AccountBO sourceAccount, AccountBO targetAccount);
 
     /**
-     * 根据账户信息查询账户
-     * @param accountCondition 账户信息
+     *根据转账金额更新指定账户的余额
+     * @param accountName 指定账户
+     * @param amount 转账金额
+     * @return
+     * @throws SQLException
+     */
+     boolean update(String accountName,BigDecimal amount) throws SQLException;
+
+    /**
+     * 根据账号名查询账户信息
+     * @param accountName
      * @return
      */
-     List<Account> select(Account accountCondition);
+    Account select(String accountName) throws Exception;
+
+    /**
+     * 查询所有账号
+     * @return
+     * @throws Exception
+     */
+    List<Account>selectAll()throws Exception;
+
+
+    /**
+     * 新增账号
+     * @param account
+     * @return
+     * @throws SQLException
+     */
+    boolean insert(Account account) throws SQLException;
+
+    /**
+     * 根据条件查询账号信息
+     * @param accountCondition 条件
+     * @return Account
+     * @throws Exception
+     */
+    Account selectOne(Account accountCondition) throws Exception;
+
+
+    /**
+     * 根据条件删除账号
+     * @param accountCondition
+     * @return
+     * @throws SQLException
+     */
+    boolean delete(Account accountCondition) throws SQLException;
+
+
+    /**
+     * 修改账号
+     * @param account
+     * @return
+     * @throws SQLException
+     */
+    boolean update(Account account) throws SQLException;
+
+
+    /**
+     * 查询账号的总数量
+     * @return
+     * @throws SQLException
+     */
+    Long selectAccountTotalCount() throws SQLException;
+
+    /**
+     * 分页查询账号信息
+     * @param pageNo 页码(当前页)
+     * @param pageSize 每页条数
+     * @throws Exception
+     * @return
+     */
+    List<Account> selectAccountByPage(Long pageNo,Integer pageSize) throws Exception;
+
+    /**
+     * 带条件的分页查询
+     * @param pageNo
+     * @param pageSize
+     * @param accountCondition
+     * @return
+     * @throws Exception
+     */
+    List<Account> selectAccountByPage(Long pageNo,Integer pageSize,Account accountCondition) throws Exception;
+
+
+
+
+
+
+
+
 }

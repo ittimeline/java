@@ -1,6 +1,10 @@
 package net.ittimeline.java.web.foundational.service;
 
-import net.ittimeline.java.web.foundational.entity.User;
+import net.ittimeline.java.web.foundational.bean.vo.UserVO;
+import net.ittimeline.java.web.foundational.bean.entity.User;
+
+import java.util.List;
+
 
 /**
  * 用户业务逻辑
@@ -15,5 +19,29 @@ public interface UserService {
      * @param user
      * @return
      */
-    public boolean login(User user);
+    public boolean login(User user) throws Exception;
+
+    /**
+     * 用户注册(需要用户名和密码)
+     * @param user
+     * @return
+     */
+    public boolean register(User user) throws Exception;
+
+    /**
+     * 查询所有用户(不带分页)
+     * @return
+     */
+    public List<UserVO> findAllUsers() throws Exception;
+
+
+    /**
+     * 根据用户名查找用户
+     * @param name
+     * @return true表示存在，false表示不存在
+     */
+    boolean findByName(String name);
+
+
+
 }

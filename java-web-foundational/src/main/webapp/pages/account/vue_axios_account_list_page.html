@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue+Axios改造分页查询账号</title>
+    <script src="../../js/getParameter.js"></script>
+    <script src="../../js/axios.js"></script>
+    <script src="../../js/vue.js"></script>
+
+</head>
+
+<body>
+<div id="app">
+
+    <h1>Vue+Axios改造分页查询账号</h1>
+    <div style="color: red"></div>
+
+    <table width="900px" >
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>账号名</th>
+            <th>账号余额</th>
+            <th>账号状态</th>
+            <th>账号的创建时间</th>
+            <th>账号的修改时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr v-for="(account,index) in pageBean.dataList">
+                <td v-html="index+1"></td>
+                <td v-html="account.name"></td>
+                <td v-html="account.balance"></td>
+                <td v-html="account.status==1?'启用':'禁用'"></td>
+                <td v-html="account.createDate"></td>
+                <td v-html="account.updateDate"></td>
+                <td><a href="#" @click="axiosDeleteAccountById(account.id,account.name)">删除账号</a>
+                    <a v-bind:href="'vue_axios_account_update.html?id='+account.id">修改账号</a>
+                </td>
+            </tr>
+
+        </tbody>
+
+        <tfoot>
+        <tr>
+<!--                上一页-->
+            <td v-show="pre"><a v-bind:href="'vue_axios_account_list_page.html?method=findAccountByPage&pageNo='+(pageBean.pageNo-1)+'&pageSize='+pageBean.pageSize">上一页</a></td>
+<!--            页码-->
+            <td v-for="(pageNo,index) in pageBean.totalPage">
+                <a
+                        v-html="pageNo==currentPageNo?redPageNo:pageNo"
+                        v-bind:href="'vue_axios_account_list_page.html?method=findAccountByPage&pageNo='+pageNo+'&pageSize='+pageBean.pageSize"
+                ></a>
+            </td>
+            <!--      下一页      -->
+            <td v-show="next"><a v-bind:href="'vue_axios_account_list_page.html?method=findAccountByPage&pageNo='+(pageBean.pageNo+1)+'&pageSize='+pageBean.pageSize">下一页</a></td>
+
+        </tr>
+
+<!--        总条数和每页显示的条数-->
+        <tr >
+            <td v-html="'总条数:'+pageBean.totalCount"></td>
+            <td v-html="'每页显示的条数'+pageBean.pageSize"></td>
+        </tr>
+        </tfoot>
+
+
+    </table>
+    <div>
+        <a href="vue_axios_account_add.html" target="_blank">添加账户</a>
+
+    </div>
+</div>
+
+
+<script>
+    let pageNo = parseInt(getParameter("pageNo"));
+    let pageSize = parseInt(getParameter("pageSize"));
+
+
+    new Vue({
+        el: "#app",
+        data: {
+            pageBean:{
+
+            },
+            pre:true,
+            next:true,
+            currentPageNo:pageNo,  //当前页码
+            redPageNo:"<span style='color: red'>"+pageNo+"</span>",
+            errorMessage:""
+        },
+        methods: {
+            findAccountByPage(){
+                axios.post("../../async/account?method=findAccountByPage&pageNo="+pageNo+"&pageSize="+pageSize)
+                    .then(response=>{
+                        //分页查询账号成功
+                        if (response.data.flag){
+                            //response.data是ResponseBean
+                            console.log("response.data="+response.data)
+                            //response.data.data是PageBean
+                            console.log("response.data.data="+response.data.data)
+                            this.pageBean=response.data.data
+
+                            //判断是否显示上一页
+                            if (this.pageBean.pageNo>1){
+                                this.pre=true
+                            }else{
+                                this.pre=false
+                            }
+
+                            //是否显示下一页
+                            if (this.pageBean.pageNo<this.pageBean.totalPage){
+                                this.next=true
+                            }else{
+                                this.next=false
+                            }
+
+                        }
+
+
+
+                    }).catch(error=>{
+                        console.log("服务器异常，异常信息是"+error)
+                    this.errorMessage="服务器异常"
+                })
+            }
+        }, created() {
+            this.findAccountByPage()
+
+        }
+    })
+</script>
+</body>
+</html>

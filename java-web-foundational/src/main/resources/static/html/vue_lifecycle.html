@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue生命周期</title>
+    <script src="../js/vue.js"></script>
+
+
+</head>
+
+<body>
+<h1>Vue生命周期</h1>
+<!--
+    2.准备vue的视图
+-->
+<div id="app">
+    <div v-html="message">
+
+    </div>
+</div>
+<script>
+    //3.创建Vue对象
+    let vm = new Vue({
+        el: "#app", //指定vue的视图
+        data: { //数据模型
+            message: "hello,vue"
+        }, methods: {
+            /**
+             *
+             * @param lifecycleFunctionName 生命周期的函数名称
+             * @param vueObject vue实例
+             */
+            showInfo(lifecycleFunctionName, vueObject) {
+                console.log("生命周期的钩子函数名称:" + lifecycleFunctionName)
+                console.log("数据模型的数据:" + vueObject.message)
+                console.log("el元素：" + vueObject.$el)
+                console.log("元素内容:" + document.getElementById("app").innerHTML)
+            }
+        },
+        //vue对象没有实例化出来，vue对象的数据模型也没有创建出来
+        beforeCreate() {
+            //不能在这里发送异步请求给服务器，并且将服务器响应数据赋值给数据模型
+            this.message="hello,vue changed"
+            //vue对象没有创建出来，无法调用showInfo函数
+            this.showInfo("----beforeCreate---",this)
+        },
+
+        //当created函数执行的时候，vue对象已经创建出来了，vue对象中的数据模型也创建出来了
+        created(){
+            //因此可以在这里给服务器发送异步请求，并且将服务器响应的结果赋值给数据模型
+            this.message="hello,vue changed"
+            this.showInfo("----created---",this)
+        },
+        //数据模型赋值给vue视图，但是没有赋值给真实视图
+        beforeMount(){
+            this.showInfo("----beforeMount---",this)
+        },
+
+        //生成页面上真正的DOM，我们会发现DOM元素和el的元素是一致的
+        mounted(){
+            //获取视图的真实数据
+            console.log("message:"+this.message)
+            this.showInfo("----mounted---",this)
+
+        }
+    });
+</script>
+</body>
+</html>

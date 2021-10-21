@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON的使用</title>
+</head>
+
+<body>
+
+<script>
+  // {key:value,key:value}
+  // JSON的定义
+  let orderInfo={"orderId":10000000,"orderNo":"TB10000000",
+    "address":{"province":"广东省","city":"深圳市","country":"罗湖区"},
+    "products":[{"productName":"iphone12promax","price":12000},{"productName":"iphone12","price":7000}]}
+  // JSON数据的访问
+  console.log("获取订单的订单ID:"+orderInfo.orderId)
+  console.log("获取订单的订单号: "+orderInfo.orderNo)
+  console.log("获取订单地址的省份: "+orderInfo.address.province)
+  console.log("获取订单地址的城市: "+orderInfo.address.city)
+  console.log("获取订单地址的区县: "+orderInfo.address.country)
+  console.log("获取第一个产品的产品名称: "+orderInfo.products[0].productName)
+  console.log("获取第二个产品的产品价格: "+orderInfo.products[1].price)
+
+
+
+</script>
+</body>
+</html>

@@ -1,18 +1,16 @@
-package net.ittimeline.java.web.foundational.entity;
-
+package net.ittimeline.java.web.foundational.bean.vo;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
- * 用户实体
+ * User View Obejct
  *
  * @author tony 18601767221@163.com
- * @version 2021/7/3 16:07
+ * @version 2021/7/21 11:02
  * @since JDK11
  */
+public class UserVO  implements Serializable {
 
-public class User implements Serializable {
 
     /**
      * id
@@ -30,19 +28,20 @@ public class User implements Serializable {
     private String password;
 
     /**
-     * 创建日期时间
+     * 创建日期/时间
      */
-    private LocalDateTime createDate;
+    private String createDate;
 
     /**
-     * 修改日期时间
+     * 修改日期/时间
      */
-    private LocalDateTime updateDate;
+    private String updateDate;
 
-    public User() {
+    public UserVO() {
+
     }
 
-    public User(Integer id, String name, String password, LocalDateTime createDate, LocalDateTime updateDate) {
+    public UserVO(Integer id, String name, String password, String createDate, String updateDate) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -74,30 +73,30 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public LocalDateTime getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
-    public LocalDateTime getUpdateDate() {
+    public String getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(LocalDateTime updateDate) {
+    public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserVO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
+                ", createDate='" + createDate + '\'' +
+                ", updateDate='" + updateDate + '\'' +
                 '}';
     }
 }

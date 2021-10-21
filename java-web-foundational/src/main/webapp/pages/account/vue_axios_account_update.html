@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue+Axios改造修改账号</title>
+    <script src="../../js/getParameter.js"></script>
+    <script src="../../js/axios.js"></script>
+    <script src="../../js/vue.js"></script>
+
+</head>
+
+<body>
+<div id="app">
+    <h1>Vue+Axios改造修改账号</h1>
+    <div style="color: red" v-html="errorMessage"></div>
+    <!-- onsubmit="return false" 禁用表单的同步提交-->
+    <form action="account" method="post" onsubmit="return false">
+        <input type="hidden" name="method" value="updateAccount"/>
+        <input type="hidden" name="id"  v-model="account.id"/>
+        账户名:<input type="text" name="name"  autocomplete="off" v-model="account.name"/> <br/>
+        账户余额: <input type="text" name="balance"  autocomplete="off" v-model="account.balance"/> <br/>
+        账号状态:
+        <input type="radio" name="status" value="1" v-model="account.status" >启用
+        <input type="radio" name="status" value="0" v-model="account.status" >禁用
+        <br/>
+        <input type="submit" value="提交" @click="axiosUpdateAccount()"/>
+    </form>
+</div>
+
+<script>
+    //异步请求回显账号的数据
+    let accountId = getParameter("id");
+    new Vue({
+        el: "#app",
+        data: {
+            account: {},
+            errorMessage:""
+        },
+        methods: {
+            toUpdateAccountPage() {
+                axios.post("../../async/account?method=toUpdateAccountPage&id=" + accountId).then(response => {
+                    //回显账号数据成功
+                        if (response.data.flag) {
+                        //将服务器返回的数据赋值给数据模型
+                            this.account=response.data.data
+                        }else{
+                            //alert("回显账号数据失败")
+                            this.errorMessage="回显账号数据失败"
+                        }
+                    }
+                ).catch(error=>{
+                    console.log("服务器异常，异常信息是"+error)
+                    this.errorMessage="服务器异常"
+
+                })
+            },
+            //异步修改账号
+            axiosUpdateAccount(){
+                axios.post("../../async/account?method=updateAccount",this.account).then(response=>{
+                    //账号修改成功
+                    if (response.data.flag){
+                        //跳转到账号列表页面
+                        location.href="vue_axios_account_list.html";
+                    }else{
+                        this.errorMessage="修改账号失败"
+                    }
+                }).catch(error=>{
+                    console.log("服务器异常，异常信息是"+error)
+                    this.errorMessage="服务器异常"
+
+                })
+            }
+        },
+        created() {
+            this.toUpdateAccountPage()
+        }
+    })
+
+</script>
+</body>
+</html>

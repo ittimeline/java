@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>异步修改账号</title>
+    <script src="../../js/jquery-3.6.0.js"></script>
+    <script src="../../js/getParameter.js"></script>
+
+</head>
+
+<body>
+<h1>异步修改账号</h1>
+<div style="color: red" id="errorMessage"></div>
+<!-- onsubmit="return false" 禁用表单的同步提交-->
+<form action="account" method="post" onsubmit="return false" id="updateAccountForm">
+    <input type="hidden" name="method" value="updateAccount"/>
+    <input type="hidden" name="id" id="id"/>
+    账户名:<input type="text" name="name" id="name" autocomplete="off"/> <br/>
+    账户余额: <input type="text" name="balance" id="balance" autocomplete="off"/> <br/>
+    账号状态:
+    <input type="radio" name="status" value="1" id="enableStatus">启用
+    <input type="radio" name="status" value="0" id="disableStatus">禁用
+    <br/>
+    <input type="submit" value="提交" onclick="updateAccount()"/>
+</form>
+<script>
+    //异步请求回显账号的数据
+    let accountId = getParameter("id");
+    //$.post(请求路径，请求参数，处理响应结果的匿名函数，响应结果的类型默认是text，也就是普通文本类型)
+    $.post("../../async/account", "method=toUpdateAccountPage&id=" + accountId, function (result) {
+        //处理响应内容
+
+        //服务器没有异常
+        if (result.flag) {
+            //回显数据
+            let account = result.data;
+
+            $("#id").val(account.id);
+            $("#name").val(account.name);
+            $("#balance").val(account.balance);
+            if (account.status == 1) {
+                $("#enableStatus").prop("checked", true)
+            } else {
+                $("#disableStatus").prop("checked", true)
+
+            }
+
+        } else {
+            $("#errorMessage").html("服务器异常")
+        }
+
+    }, "json")
+
+
+    /**
+     * 异步修改账号
+     */
+    function updateAccount() {
+        //serialize()用于将表单的所有数据拼接成请求参数的样子 method=addAccount&name=?&balance=?&status=?
+        let formRequestData = $("#updateAccountForm").serialize();
+        //$.post(请求路径，请求参数，处理响应结果的匿名函数，响应结果的类型默认是text，也就是普通文本类型)
+        $.post("../../async/account",formRequestData,function (result){
+            //处理响应结果
+
+            //服务器没有异常
+            if (result.flag){
+                //修改成功
+                if (result.data){
+                    //跳转到账号列表页面
+                    location.href="account_list.html";
+                }
+            }else{
+                $("#errorMessage").html("账号修改失败")
+            }
+        },"json")
+
+
+    }
+
+
+</script>
+</body>
+</html>

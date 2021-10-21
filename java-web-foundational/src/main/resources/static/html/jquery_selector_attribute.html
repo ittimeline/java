@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery选择器-属性选择器</title>
+  <!--  引入外部jQuery的js文件-->
+  <script src="../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<h1>jQuery选择器-属性选择器</h1>
+<!--  type为text表示文本框-->
+用户名:<input type="text"  name="name" id="name" autocomplete="off"/><br/>
+<!--  type为password表示密码框-->
+密码:<input type="password"  name="password" autocomplete="off"/><br/>
+
+<script>
+  // 将包含id属性的input标签的背景颜色设置为红色
+  // [属性名] 表示某个元素包含指定的属性
+  $("input[id]").css("background-color","red")
+
+  // 将密码框的背景颜色变成黄色
+  //[属性名=属性值] 表示查找某个元素的属性名是什么属性值
+  $("input[type='password']").css("background-color","yellow")
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery遍历</title>
+    <!--  引入外部jQuery的js文件-->
+    <script src="../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<h1>jQuery遍历</h1>
+
+<ul>
+    <li id="beijing">北京</li>
+    <li id="shanghai">上海</li>
+    <li id="guangzhou">广州</li>
+    <li id="shenzhen">深圳</li>
+</ul>
+
+<script>
+    let array = ['北京', '上海', '广州', '深圳']
+    console.log("*************************************js的for循环方式遍历数组*************************************")
+
+    for (let i = 0; i < array.length; i++) {
+        console.log(array[i])
+    }
+    console.log("*************************************js的for of语句方式遍历数组*************************************")
+    for (element of array) {
+        console.log(element)
+    }
+    console.log("*************************************jQuery的全局each函数方式遍历数组*************************************")
+    // jQuery全局方法就是使用$调用的方法，不需要使用jQuery对象调用，即可以遍历jQuery对象，又可以遍历js对象
+    $.each(array, function (i, element) {
+        console.log(element)
+    })
+
+    console.log("*************************************jQuery的全局each函数方式遍历列表*************************************")
+    //i表示索引 element表示遍历到的元素(标签)
+    $.each($("li"), function (i, element) {
+        //打印标签的全部内容
+        console.log(element.innerText)
+    })
+
+    //jquery对象的each()方法只能遍历jQuery对象，不能遍历js对象
+    console.log("*************************************jQuery的jquery对象的each()函数方式遍历列表*************************************")
+    $("li").each(function (i, element) {
+        //element是jQuery对象
+        console.log("i = " + i + " :  element.innerText" + element.innerText)
+    })
+
+</script>
+</body>
+</html>

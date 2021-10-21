@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--
+    configuration表示核心配置文件的根标签
+-->
+<configuration>
+
+<!--
+    加载类路径下的jdbc.properties文件
+-->
+    <properties resource="jdbc.properties"></properties>
+
+    <settings>
+        <!-- 驼峰命名 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--        开启二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
+<!--        开启全局延迟加载(懒加载)-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <typeAliases>
+<!--
+        <typeAlias type="net.ittimeline.java.web.foundational.bean.entity.User" alias="user"/>
+
+-->
+<!--
+        给指定的包下的所有的类取别名，别名就是类名
+
+-->
+        <package name="net.ittimeline.java.web.foundational.bean"/>
+
+    </typeAliases>
+
+    <!--
+        environments 表示配置多个数据库配置的环境信息
+        default 表示默认使用哪个环境，这里使用的本地环境的MySQL8.0
+        一般在公司开发项目的时候至少有三个环境
+        开发环境
+        测试环境
+        生产环境/线上环境
+        三个环境的数据库配置是不同，因此要准备不同的配置
+        在公司做项目的时候，开发阶段连接开发环境的数据库，数据库的配置找运维或者DBA的同事要。
+
+    -->
+    <environments default="local">
+        <!--     定义本地环境的数据库和事务配置   -->
+        <environment id="local">
+            <!--
+               transactionManager 事务配置 type=JDBC 表示使用JDBC的事务
+                开发项目的时候会替换成Spring的声明式事务
+            -->
+            <transactionManager type="JDBC"></transactionManager>
+
+            <!--
+                dataSource 数据源配置
+                type="POOLED" 表示使用MyBatis的内置连接池
+                开发项目的时候会替换成第三方的连接池，例如Druid
+
+            -->
+            <dataSource type="POOLED">
+                <!--
+
+                    本地MySQL8.0的数据库配置信息
+                -->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.name}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+
+
+
+    </environments>
+
+
+<!--
+    指定加载哪些映射配置文件
+-->
+    <mappers>
+<!--
+        加载UserMapper.xml
+-->
+<!--        <mapper resource="net/ittimeline/java/web/foundational/mapper/UserMapper.xml"/>-->
+<!--        开发项目的时候会有多个*Mapper.xml，因此一般会使用包扫描-->
+        <package name="net.ittimeline.java.web.foundational.mapper"/>
+    </mappers>
+</configuration>

@@ -1,7 +1,7 @@
 package net.ittimeline.java.web.foundational.dao.impl;
 
 import net.ittimeline.java.web.foundational.dao.UserDao;
-import net.ittimeline.java.web.foundational.entity.User;
+import net.ittimeline.java.web.foundational.bean.entity.User;
 import net.ittimeline.java.web.foundational.util.DruidDataSourceUtil;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;

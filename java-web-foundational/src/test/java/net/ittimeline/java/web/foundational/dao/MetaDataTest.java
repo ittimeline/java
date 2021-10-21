@@ -1,6 +1,5 @@
 package net.ittimeline.java.web.foundational.dao;
 
-import net.ittimeline.java.web.foundational.entity.User;
 import net.ittimeline.java.web.foundational.util.JDBCUtil;
 import org.testng.annotations.Test;
 

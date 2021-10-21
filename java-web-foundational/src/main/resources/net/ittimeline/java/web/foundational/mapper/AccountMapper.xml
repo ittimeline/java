@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+#{}表示占位符，就可以看做是JDBC中PreparedStatement的?占位符
+如果方法的参数是简单类型，例如Long,Integer,String,那么#{}中的值可以是任意的值，但是为了代码的可读性，还是跟方法的参数名保持一致
+-->
+<mapper namespace="net.ittimeline.java.web.foundational.mapper.AccountMapper">
+
+    <!--
+        使用sql标签将可以复用的SQL语句抽取出来
+        在使用需要到该SQL语句的地方使用include标签引入即可
+    -->
+    <sql id="select_all">
+        select id, name, balance, status, create_date, update_date,user_id
+        from jdbc_account
+    </sql>
+
+
+    <resultMap id="accountUserResultMap" type="Account" autoMapping="true">
+        <id property="userId" column="user_id"></id>
+        <association property="user" autoMapping="true" select="net.ittimeline.java.web.foundational.mapper.UserMapper.selectUserById" column="user_id" >
+        </association>
+    </resultMap>
+
+    <select id="selectById" resultType="Account" parameterType="long">
+        <include refid="select_all"/>
+        where id = #{id}
+    </select>
+
+<!--
+parameterType表示参数类型，因为我们要传一个Account对象，因此值就是Account对象的别名
+
+    #{}表示占位符，就可以看做是JDBC中PreparedStatement的?占位符
+    如果方法的参数是复杂类型，例如POJO,那么#{}中的值由POJO的属性名来决定的，例如这里就是Account类中的属性名决定的
+
+    selectKey 用于获取新增数据的主键
+    keyColumn 表示查询的列名
+    keyProperty 表示赋值的属性名
+    resultType 表示查询出来的结果类型
+     select last_insert_id() 查询最后一个自增长id的值
+-->
+    <insert id="insert" parameterType="Account">
+        <selectKey resultType="long" order="AFTER" keyProperty="id" keyColumn="id">
+            select last_insert_id()
+        </selectKey>
+        insert into jdbc_account values(null,#{name},#{balance},#{status},now(),now(),#{userId})
+    </insert>
+
+
+    <update id="update" parameterType="Account">
+        update jdbc_account
+        set name =#{name},
+            balance= #{balance},
+            status=#{status},
+            update_date=now()
+        where id = #{id}
+    </update>
+
+  <!--  <delete id="deleteById" parameterType="Long">
+        delete
+        from jdbc_account
+        where id = #{id}
+    </delete>-->
+
+    <select id="selectAccountByPage" resultType="Account" parameterType="map">
+        <include refid="select_all"/>
+        <where>
+            <if test="status!=null">
+                and status =#{status}
+            </if>
+
+        </where>
+        limit #{startIndex},#{pageSize}
+    </select>
+
+
+    <select id="selectAccountByQueryVO" resultType="Account"
+            parameterType="net.ittimeline.java.web.foundational.bean.vo.QueryVO">
+        <include refid="select_all"/>
+        <where>
+            <if test="condition.status!=null">
+                and status =#{condition.status}
+            </if>
+
+        </where>
+        limit #{offSet},#{pageSize}
+    </select>
+
+
+    <select id="selectAccountListByStatus" parameterType="integer" resultType="Account">
+        <include refid="select_all"/>
+        <if test="status!=null">
+            where status=#{status}
+        </if>
+
+    </select>
+
+
+    <!--
+            where标签的作用:
+            1. 可以在条件之前加上where关键字
+            2. 可以去掉第一个条件前的and
+
+    -->
+    <select id="selectAccountListByStatusAndName" parameterType="Account" resultType="Account">
+        <include refid="select_all"/>
+        <where>
+            <if test="status!=null">
+                and status=#{status}
+            </if>
+
+            <if test="name!=null">
+                and name=#{name}
+            </if>
+        </where>
+
+    </select>
+
+
+    <delete id="deleteByIds" parameterType="long">
+        delete from jdbc_account
+        <!--
+            使用foreach标签遍历集合，将遍历出来的数据放到()里面
+            collection属性表示要遍历的集合，如果要遍历的是一个List集合那么值就是list,如果是Map那么值就是map
+            item属性表示遍历出来的元素
+            separator属性表示遍历出来的每个元素的分隔符
+            open属表示在集合遍历出来的第一个元素之前拼接字符串
+            close属性表示在集合遍历出来最后一个元素之后拼接字符传
+        -->
+        <foreach collection="list" item="id" separator="," open="where id in(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+<!--
+   如果是一对一
+    属性名和字段名一样的 不需要手动映射，可以配置autoMapping="true" 自动映射
+-->
+    <resultMap id="accountUserInfoResultMap" type="Account" autoMapping="true">
+<!--        <id property="id" column="id"></id>-->
+        <result property="name" column="accountName"/>
+<!--        <result property="status" column="status"/>-->
+<!--        <result property="balance" column="balance"/>-->
+        <result property="createDate" column="accountCreateDate"/>
+        <result property="updateDate" column="accountUpdateDate"/>
+<!--
+        一对一映射 一个账号只属于一个用户
+
+-->
+        <association property="user" javaType="User" autoMapping="true">
+<!--            <id property="id" column="id"></id>-->
+<!--            <result property="name" column="name"/>-->
+<!--            <result property="password" column="password"/>-->
+<!--            <result property="createDate" column="create_date"/>-->
+<!--            <result property="updateDate" column="update_date"/>-->
+        </association>
+
+
+    </resultMap>
+
+
+    <select id="selectAccountUserInfo" resultMap="accountUserInfoResultMap">
+        select account.id as accountId,
+               account.name as accountName,
+               account.status ,
+               account.balance ,
+               account.create_date as accountCreateDate,
+               account.update_date as accountUpdateDate,
+               user.id,
+               user.name,
+               user.password,
+               user.create_date,
+               user.update_date
+        from jdbc_account account,
+             jdbc_user user
+        where account.user_id = user.id
+          and account.id = #{accountId};
+    </select>
+
+
+    <resultMap id="accountUserInfoResultMapLazyLoad" type="Account" autoMapping="true">
+        <id property="userId" column="user_id"></id>
+<!--
+        select 表示第二次执行的查询
+        fetchType="lazy" 表示使用懒加载，只针对当前的查询(UserMapper.selectById)有效
+        column表示查询的列名
+-->
+        <association property="user"
+                     autoMapping="true"
+                     select="net.ittimeline.java.web.foundational.mapper.UserMapper.selectById"
+                     column="user_id"
+                     fetchType="lazy"
+        >
+
+        </association>
+    </resultMap>
+
+    <select id="selectAccountUserInfoLazyLoad" parameterType="long" resultMap="accountUserInfoResultMapLazyLoad">
+        <include refid="select_all"/>
+        where id = #{id}
+    </select>
+
+
+    <select id="selectAccountListByUserId" parameterType="long" resultType="Account">
+        <include refid="select_all"/>
+        where user_id = #{userId}
+    </select>
+
+</mapper>

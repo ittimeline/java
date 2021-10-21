@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery实现电子时钟</title>
+    <!--引入外部的jQuery的js文件-->
+    <script src="../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<h1>jQuery实现电子时钟</h1>
+
+<div id="time" style="font-size: xxx-large"></div>
+<input type="button" value="开始" onclick="startTime()"/>
+<input type="button" value="暂停" onclick="pauseTime()"/>
+<script>
+    let intervalId
+
+    /**
+     * 开始显示当前时间
+     */
+    function startTime() {
+        let currentTime = new Date().toLocaleString();
+        $("#time").text(currentTime)
+        //防止用户点击多次开始按钮，应该要先清除定时器，再启动定时器
+        if (intervalId!=null){
+            clearInterval(intervalId)
+        }
+
+        intervalId = setInterval(function () {
+            let currentTime = new Date().toLocaleString();
+            $("#time").text(currentTime)
+        }, 1000);
+
+    }
+
+
+    /**
+     * 暂停显示当前时间
+     */
+    function pauseTime() {
+
+        //要让时间暂停，就是要清除定时器
+        clearInterval(intervalId)
+    }
+
+</script>
+</body>
+</html>

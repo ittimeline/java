@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用jQuery发送异步请求</title>
+    <script src="../js/jquery-3.6.0.js"></script>
+
+</head>
+
+<body>
+<h1>使用jQuery发送异步请求</h1>
+<div id="responseText" style="color: red"></div>
+
+<a href="#" onclick="sendGetRequest()">使用jQuery发送异步Get请求</a><br/>
+<a href="#" onclick="sendPostRequest()">使用jQuery发送异步Post请求</a><br/>
+<a href="#" onclick="sendRequest()">使用jQuery的ajax方法发送异步请求</a><br/>
+
+<script>
+
+    /**
+     * 使用jQuery发送异步Get请求
+     */
+    function sendGetRequest(){
+        // $.get(请求地址和请求参数,处理响应结果的匿名函数,响应的数据类型默认是text，也就是普通文本类型)
+        $.get("../handle?name=tony",function (result){
+            // result就是服务器响应的数据
+            $("#responseText").html(result)
+
+        })
+
+    }
+    /**
+     * 使用jQuery发送异步POST请求
+     */
+    function sendPostRequest(){
+        //$.post(请求路径，请求参数，处理响应结果的匿名函数，响应结果的类型默认是text，也就是普通文本类型)
+        $.post("../handle","name=tony",function (result){
+            // result就是服务器响应的数据
+            $("#responseText").html(result)
+        })
+    }
+
+    /**
+     * 使用jQuery的ajax方法发送异步请求
+     */
+    function sendRequest(){
+        $.ajax({
+            //请求服务器的URL地址
+            url:"../handle",
+            //发送到服务器的数据 可以是键值对的形式，也可以是JS对象形式
+            data:"name=tony",
+            //请求方式 默认是是GET,这里是POST
+            type:"get",
+            //预期的返回类型，取值可以是xml,html,json,text
+            dataType:"text",
+            //请求处理成功的回调函数
+            success:function (result){
+                // result就是服务器响应的数据
+                $("#responseText").html(result)
+            },
+            //请求处理失败的回调函数
+            error:function (){
+                $("#responseText").html("服务器异常")
+
+            }
+        })
+
+    }
+
+
+
+</script>
+</body>
+</html>

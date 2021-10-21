@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue绑定表单的表单项值</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+
+<body>
+<h1>Vue绑定表单的表单项值</h1>
+
+<div id="app">
+    <form>
+        <!--    通过v-model绑定表单项的值-->
+        账号名:<input type="text" name="name" v-model="account.name"/><br/>
+        账号余额:<input type="text" name="balance" v-model="account.balance"/><br/>
+        账号状态:<input type="text" name="status" v-model="account.status"/><br/>
+        <input type="button" value="获取表单数据" @click="getAccount()"/> <br/>
+        <input type="button" value="回显账号数据" @click="setAccount()"/> <br/>
+
+
+    </form>
+</div>
+
+
+<script>
+    new Vue({
+        el: "#app",
+        data: { //数据模型
+            account: {
+
+            }
+        },
+        methods: {
+            //将视图绑定到数据模型
+            getAccount() {
+                //通过访问数据模型就可以获取视图的数据
+                console.log("账号名:"+this.account.name)
+                console.log("账号余额:"+this.account.balance)
+                console.log("账号状态:"+this.account.status)
+
+            },
+            setAccount() {
+                //模拟服务器返回的数据
+                let accountInfo={
+                    name: "tony",
+                    balance: 1000000,
+                    status: "启用"
+                }
+                //将数据模型绑定到视图
+                //将服务器返回的数据赋值给数据模型
+                this.account=accountInfo;
+            }
+        }
+
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+</head>
+
+<body>
+<form action="../login" method="post">
+  用户名:<input type="text" name="name" autocomplete="off"/><br/>
+  密码:<input type="password" name="password"  autocomplete="off"/><br>
+  验证码:<input type="text" name="captcha" autocomplete="off"/><br/>
+    <img src="../captcha" width="130px" height="48px" id="captcha" onclick="changeCaptcha()" /> <br/>
+
+  <input type="submit" value="提交"/>
+</form>
+
+<script>
+    /**
+     * 用户点击验证码图片实现切换验证码
+     */
+    function changeCaptcha(){
+        //获取图片的元素
+        let imgElement = document.getElementById("captcha");
+        //因为访问路径没有改变，所以服务器认为我们发送的是一个请求，所以服务器会返回一个状态码 304,所以浏览器会从缓存中取数据
+        // 如果每次访问的url有变化，就不会从缓存中取数据，因此可以在请求地址后面加一个动态参数，例如日期
+        imgElement.setAttribute("src","../captcha?date="+new Date())
+
+
+    }
+
+</script>
+</body>
+</html>

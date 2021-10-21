@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery选择器-层级选择器</title>
+  <!--引入外部的jQuery的js文件-->
+  <script src="../js/jquery-3.6.0.js"></script>
+  <style >
+    div,span{
+      width: 180px;
+      height: 180px;
+      margin: 20px;
+      background: #9999CC;
+      border: #000 1px solid;
+      float:left;
+      font-size: 17px;
+      font-family:Roman;
+    }
+
+    div .mini{
+      width: 50px;
+      height: 50px;
+      background: #CC66FF;
+      border: #000 1px solid;
+      font-size: 12px;
+      font-family:Roman;
+    }
+
+    div .mini01{
+      width: 50px;
+      height: 50px;
+      background: #CC66FF;
+      border: #000 1px solid;
+      font-size: 12px;
+      font-family:Roman;
+    }
+
+  </style>
+
+
+</head>
+
+<body>
+<input onclick="fn1()" type="button" value=" 改变 <body> 内所有 <div> 的背景色为红色"  id="b1"/>
+<input onclick="fn2()" type="button" value=" 改变 <body> 内子 <div> 的背景色为 红色"  id="b2"/>
+<input onclick="fn3()" type="button" value=" 改变 id 为 one 的下一个 <div> 的背景色为 红色"  id="b3"/>
+<input onclick="fn4()" type="button" value=" 改变 id 为 two 的元素后面的所有兄弟<div>的元素的背景色为 红色"  id="b4"/>
+<h1>jquery选择器-层级选择器</h1>
+<div id="one">
+  id为one
+
+</div>
+
+<div id="two" class="mini" >
+  id为two   class是 mini
+  <div  class="mini" >class是 mini</div>
+</div>
+
+<div class="one" >
+  class是 one
+  <div  class="mini" >class是 mini</div>
+  <div  class="mini" >class是 mini</div>
+</div>
+<div class="one">
+  class是 one
+  <div  class="mini01" >class是 mini01</div>
+  <div  class="mini" >class是 mini</div>
+</div>
+
+<div id="mover" >
+  动画
+</div>
+<span class="spanone">span</span>
+
+<script>
+  /**
+   * 改变 <body> 内所有 <div> 的背景色为红色
+   */
+  function fn1(){
+    // 1.获取 <body> 内所有 <div>
+    // 2.将背景颜色设置为红色
+    $("body div").css("background-color","red")
+  }
+
+
+  /**
+   * 改变 <body> 内子 <div> 的背景色为 红色
+   */
+  function  fn2(){
+    $("body>div").css("background-color","red")
+  }
+
+
+  /**
+   * 改变 id 为 one 的下一个 <div> 的背景色为 红色
+   */
+  function  fn3(){
+    $("#one+div").css("background-color","red")
+  }
+
+  /**
+   * 改变 id 为 two 的元素后面的所有兄弟<div>的元素的背景色为 红色
+   */
+  function fn4(){
+    $("#two~div").css("background-color","red")
+  }
+
+
+</script>
+</body>
+</html>

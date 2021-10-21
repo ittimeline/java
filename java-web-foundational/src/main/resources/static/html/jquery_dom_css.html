@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery操作标签的样式</title>
+  <!--  引入外部jQuery的js文件-->
+  <script src="../js/jquery-3.6.0.js"></script>
+
+  <style type="text/css">
+    .redStyle{
+      background-color: red;
+      width: 800px;
+    }
+
+    .yellowStyle{
+      background-color: yellow;
+      width: 1200px;
+    }
+  </style>
+</head>
+
+<body>
+<h1>jQuery操作标签的样式</h1>
+用户名:<input type="text" name="name" onmouseover="useRedStyle()" onmouseout="useYellowStyle()" id="name">
+
+<script>
+
+  function useRedStyle(){
+    //删除已经有的样式
+    $("#name").removeClass("yellowStyle")
+
+    $("#name").addClass("redStyle")
+  }
+
+  function useYellowStyle(){
+    $("#name").removeClass("redStyle")
+
+    $("#name").addClass("yellowStyle")
+
+  }
+
+</script>
+</body>
+</html>

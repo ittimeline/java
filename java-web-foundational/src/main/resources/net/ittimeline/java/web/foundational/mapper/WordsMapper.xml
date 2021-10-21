@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.ittimeline.java.web.foundational.mapper.WordsMapper">
+
+<!--
+    模糊查询的三种方式
+
+    第一种方式:select id,word from jdbc_words where word like "%"#{keyWord}"%" limit 0,10
+    第二种方式:select id,word from jdbc_words where word like concat("%",#{keyWord},"%")  limit 0,10
+    第三种方式:select id,word from jdbc_words where word like '%${keyWord}%' limit 0,10
+
+-->
+    <select id="selectByWords" resultType="Words" parameterType="string">
+        select id,word from jdbc_words where word like "%"#{keyWord}"%" limit 0,10
+    </select>
+</mapper>

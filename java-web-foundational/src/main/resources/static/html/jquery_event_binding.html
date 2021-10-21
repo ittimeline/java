@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery绑定事件</title>
+  <!--  引入外部jQuery的js文件-->
+  <script src="../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<input type="button" value="按钮" id="btn" onclick="handleOnClick()" /><br/>
+<input type="text" name="name" id="name"  onblur="handleOnBlur()"/>
+
+
+<script>
+
+  //四种方式绑定事件- onclick事件
+
+  //JavaScript的普通函数方式绑定onclick事件
+  function  handleOnClick(){
+    alert(" JavaScript的普通函数方式绑定onclick事件  按钮被点击了")
+  }
+
+// JavaScript的匿名函数方式绑定onclick事件
+  document.getElementById("btn").onclick=function (){
+    alert(" JavaScript的匿名函数方式绑定onclick事件  按钮被点击了")
+
+  }
+
+  //jQuery的匿名函数方式绑定onclick事件
+  $("#btn").click(function (){
+    alert(" jQuery的匿名函数方式绑定onclick事件  按钮被点击了")
+  })
+
+  //jQuery的on方法绑定onclick事件
+  $("#btn").on("click",function(){
+    alert(" jQuery的on方法绑定onclick事件  按钮被点击了")
+  })
+
+
+  //四种方式绑定事件- onblur事件
+
+  function handleOnBlur(){
+    console.log("JavaScript的普通函数方式绑定onblur事件 文本框失去焦点了")
+  }
+
+  document.getElementById("name").onclick=function (){
+    console.log("JavaScript的匿名函数方式绑定onblur事件 文本框失去焦点了")
+  }
+
+  //jQuery的匿名函数方式绑定onclick事件
+  $("#name").blur(function (){
+    console.log(" jQuery的匿名函数方式绑定onblur事件  文本框失去焦点了")
+  })
+
+  //jQuery的on方法绑定onclick事件
+  $("#name").on("blur",function(){
+    console.log(" jQuery的on方法绑定onblur事件  文本框失去焦点了")
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

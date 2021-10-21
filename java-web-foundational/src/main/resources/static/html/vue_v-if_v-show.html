@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue绑定标签的显示和隐藏</title>
+  <script src="../js/vue.js"></script>
+
+</head>
+
+<body>
+<h1>Vue绑定标签的显示和隐藏</h1>
+<div id="app">
+<!--
+  v-if取值是true就展示标签
+  v-if取值是false就隐藏标签，其本质就是删除标签
+-->
+<!--  <img src="../images/falalilafa.jpg" width="1366" height="768" v-if="isShow">-->
+  <!--
+    v-show取值是true就展示标签
+    v-show取值是false就隐藏标签，其本质就是通过样式display:none隐藏标签，没有删除标签
+  -->
+
+  <img src="../images/falalilafa.jpg" width="1366" height="768" v-show="isShow">
+
+</div>
+<script>
+  new Vue({
+    el:"#app",
+    data:{ //数据模型
+      isShow:false
+    }
+  })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery实现复选框的全选和反选</title>
+  <!--引入外部的jQuery的js文件-->
+  <script src="../js/jquery-3.6.0.js"></script>
+  <style>
+    table{
+      width: 800px;
+    }
+  </style>
+
+</head>
+
+<body>
+<table >
+  <tr><td><input type="button" id="reverseAll"  value="反选" onclick="reverseSelect()"/> </td></tr>
+  <tr>
+    <th><input type="checkbox" id="selectAll"  value="全选/全不选"  onclick="selectAll(this)" /> </th>
+    <th>分类ID</th>
+    <th>分类名称</th>
+    <th>分类描述</th>
+  </tr>
+
+  <tr>
+    <th><input type="checkbox" class="itemSelect"/> </th>
+    <th>1</th>
+    <th>手机数码</th>
+    <th>手机数码类商品</th>
+  </tr>
+
+  <tr>
+    <th><input type="checkbox"  class="itemSelect" /> </th>
+    <th>2</th>
+    <th>电脑办公</th>
+    <th>电脑办公类商品</th>
+  </tr>
+
+  <tr>
+    <th><input type="checkbox"  class="itemSelect" /> </th>
+    <th>3</th>
+    <th>家具饰品</th>
+    <th>家具饰品类商品</th>
+  </tr>
+
+  <tr>
+    <th><input type="checkbox"  class="itemSelect"/> </th>
+    <th>4</th>
+    <th>房产汽车</th>
+    <th>房产汽车商品</th>
+  </tr>
+</table>
+<script>
+
+  /**
+   * 全选、全不选
+   * 当点击父checkbox设置父checkbox的状态和子checkbox的状态一样
+   * @param object
+   */
+  function selectAll(object){
+    //设置子checkbox的checked属性和父checkbox的checked属性一致
+    $(".itemSelect").prop("checked",object.checked)
+
+}
+
+  /**
+   * 反选 给反选按钮绑定onclick事件，设置父checkbox以及所有的子checkbox的checked属性和原来相反
+   */
+ function  reverseSelect(){
+    $(".itemSelect").each(function (index,element){
+      // element遍历出来的就是每一个子checkbox,element是一个js对象
+      element.checked=!element.checked
+    })
+
+    //设置父checkbox的checked属性和原来相反
+    let parentCheckboxCheckedValue = $("#selectAll").prop("checked");
+    $("#selectAll").prop("checked",!parentCheckboxCheckedValue)
+
+
+ }
+
+ //当所有的子checkbox都选中的时候，父checkbox的checked状态应该是选中的，如果有一个子checkbox没有选中，那么父checkbox应该不选中
+  $(".itemSelect").click(function (){
+    //如何判断子checkbox全部选中了
+    //定义一个标记
+    let flag= true
+    //遍历所有的子checkbox
+    $(".itemSelect").each(function (index,element){
+      //如果有一个没有选中
+      if (!element.checked){
+        //标记改成false
+        flag=false
+      }
+    })
+
+    $("#selectAll").prop("checked",flag)
+
+  })
+
+
+
+</script>
+</body>
+</html>

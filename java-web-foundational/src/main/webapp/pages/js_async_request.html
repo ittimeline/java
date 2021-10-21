@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用原生JS发送异步请求</title>
+</head>
+
+<body>
+<div id="responseText" style="color: red"></div>
+<h1>使用原生JS发送异步请求</h1>
+<a href="../handle?name=tony">向服务器发起同步请求</a><br/>
+<a href="#" onclick="sendGetRequest()">使用原生JS发送异步Get请求</a><br/>
+<a href="#" onclick="sendPostRequest()">使用原生JS发送异步Post请求</a><br/>
+
+
+<script>
+  /**
+   *  使用原生JS发送异步GET请求
+   */
+  function sendGetRequest(){
+    //创建XmlHttpRequest对象
+    let xhr = new XMLHttpRequest();
+    //与服务器建立连接
+    xhr.open("GET","../handle?name=tony")
+    //发送异步请求
+    xhr.send()
+
+    //处理GET请求的响应数据
+    xhr.onreadystatechange=function (){
+      if (xhr.readyState==4&&xhr.status==200){
+        //获取响应数据
+        let responseText = xhr.responseText;
+        document.getElementById("responseText").innerHTML=responseText;
+      }
+    }
+
+
+  }
+
+  /**
+   * 使用原生的JS发送异步POST请求
+   */
+  function sendPostRequest(){
+    //创建XmlHttpRequest对象
+    let xhr = new XMLHttpRequest();
+    //与服务器建立连接
+    xhr.open("POST","../handle")
+
+    //设置请求头的参数类型
+    xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+
+    //发送POST请求
+    xhr.send("name=tony")
+
+
+    //处理POST请求的响应数据
+    xhr.onreadystatechange=function (){
+      if (xhr.readyState==4&&xhr.status==200){
+        //获取响应数据
+        let responseText = xhr.responseText;
+        document.getElementById("responseText").innerHTML=responseText;
+      }
+    }
+
+  }
+
+
+
+
+
+
+</script>
+</body>
+</html>

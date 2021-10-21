@@ -25,6 +25,12 @@ public class DruidDataSourceUtil {
      */
     private static DataSource dataSource;
 
+    /**
+     * 创建一个 ThreadLocal 对象用于存储Connection
+     */
+    private static final  ThreadLocal<Connection> THREAD_LOCAL_CONNECTION=new ThreadLocal<>();
+
+
 
 
     /**
@@ -50,17 +56,17 @@ public class DruidDataSourceUtil {
 
     /**
      * 获取连接的方法
+     * 能够保证在同一个线程下获取的是同一个Connection
      * @return
      */
-    public static Connection getConnection(){
-        Connection connection = null;
-        try {
-            connection = getDataSource().getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public static Connection getConnection() throws SQLException {
+        //首先从THREAD_LOCAL_CONNECTION中获取
+        Connection connection = THREAD_LOCAL_CONNECTION.get();
+        //如果没有就将Druid的连接放到THREAD_LOCAL_CONNECTION容器中
+        if (null==connection){
+            THREAD_LOCAL_CONNECTION.set(getDataSource().getConnection());
         }
-        return connection;
-
+        return THREAD_LOCAL_CONNECTION.get();
     }
 
     /**

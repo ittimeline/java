@@ -1,13 +1,12 @@
 package net.ittimeline.java.web.foundational.dao;
 
 import net.ittimeline.java.web.foundational.dao.impl.CustomQueryRunnerUserDaoImpl;
-import net.ittimeline.java.web.foundational.dao.impl.PreparedStatementUserDaoImpl;
-import net.ittimeline.java.web.foundational.dao.impl.QueryRunnerUserDaoImpl;
-import net.ittimeline.java.web.foundational.dao.impl.StatementUserDaoImpl;
-import net.ittimeline.java.web.foundational.entity.User;
+import net.ittimeline.java.web.foundational.bean.entity.User;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -38,7 +37,12 @@ public class UserDaoTest {
         User user = new User();
         user.setName("tom");
         user.setPassword("666666");
-        int row = userDao.insert(user);
+        int row = 0;
+        try {
+            row = userDao.insert(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println(row == 1 ? "新增用户成功" : "新增用户失败");
 
     }
@@ -51,12 +55,21 @@ public class UserDaoTest {
         User userCondition = new User();
         userCondition.setId(19);
 
-        int row = userDao.delete(userCondition);
+        int row = 0;
+        try {
+            row = userDao.delete(userCondition);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println(row == 1 ? "根据id删除用户成功" : "根据id删除用户失败");
 
         userCondition = new User();
         userCondition.setName("tom");
-        row = userDao.delete(userCondition);
+        try {
+            row = userDao.delete(userCondition);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println(row >= 1 ? "根据name删除用户成功" : "根据name删除用户失败");
     }
 
@@ -71,13 +84,22 @@ public class UserDaoTest {
         User userCondition = new User();
         userCondition.setId(2);
         userCondition.setName("Tony_CTO");
-        int row = userDao.update(userCondition);
+        int row = 0;
+        try {
+            row = userDao.update(userCondition);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println(row == 1 ? "根据id修改用户名成功" : "根据id修改用户名失败");
 
         userCondition = new User();
         userCondition.setName("Tony_CTO");
         userCondition.setPassword("111111");
-        row = userDao.update(userCondition);
+        try {
+            row = userDao.update(userCondition);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println(row == 1 ? "根据用户名修改密码成功" : "根据id修改密码失败");
 
     }
@@ -90,34 +112,69 @@ public class UserDaoTest {
      */
     @Test
     public void testSelect() {
-        List<User> userList = userDao.select(null);
+        List<User> userList = null;
+        try {
+            userList = userDao.select(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("需求1.查询所有用户*****************" + userList);
 
         User userCondition = new User();
         userCondition.setId(1);
-        userList = userDao.select(userCondition);
+        try {
+            userList = userDao.select(userCondition);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("需求2.根据id查询用户*****************" + userList);
 
 
         userCondition = new User();
         userCondition.setName("admin");
         userCondition.setPassword("111111");
-        userList = userDao.select(userCondition);
+        try {
+            userList = userDao.select(userCondition);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("需求3.根据用户名和密码查询用户*****************" + userList);
 
 
         userCondition = new User();
         userCondition.setName("admin");
         userCondition.setPassword("111 ' or ' 1=1");
-        userList = userDao.select(userCondition);
+        try {
+            userList = userDao.select(userCondition);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("SQL注入后的查询结果"+userList);
 
     }
 
 
     @Test
+    public void testSelectByName(){
+        try {
+            List<User> userList = userDao.select(new User("Tony_CTO"));
+            Assert.assertEquals(userList.size(),1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    @Test
     public void testSelectCount(){
-        long count = userDao.count();
+        long count = 0;
+        try {
+            count = userDao.count();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println("当前用户的数量"+count);
     }
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>账号管理之异步添加账号</title>
+  <script src="../../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<h1>异步添加账号</h1>
+
+<div style="color: red" id="errorMessage"></div>
+
+<!--
+onsubmit="return false" 屏蔽表单的同步提交
+-->
+<form action="../../async/account" method="post" onsubmit="return false" id="addAccountForm">
+  <input type="hidden" name="method" value="addAccount"/>
+  账户名:<input type="text" name="name" autocomplete="off"/> <br/>
+  账户余额: <input type="text" name="balance" autocomplete="off" /> <br/>
+  账号状态:<input type="radio" name="status" value="1">启用  <input type="radio" name="status" value="0">禁用<br/>
+  <input type="submit" value="提交" onclick="addAccount()"/>
+</form>
+
+<script>
+  /**
+   * 异步添加账号
+   */
+  function addAccount(){
+    //serialize()用于将表单的所有数据拼接成请求参数的样子 method=addAccount&name=?&balance=?&status=?
+    let formRequestData = $("#addAccountForm").serialize();
+
+    //$.post(请求路径，请求参数，处理响应结果的匿名函数，响应结果的类型默认是text，也就是普通文本类型)
+    $.post("../../async/account",formRequestData,function (result){
+      //服务器没有异常
+      if (result.flag){
+        if (result.data){
+          //添加成功跳转到账号列表页面
+          location.href="account_list.html"
+        }
+      }else{
+        //服务器有异常
+        $("#errorMessage").html("服务器异常")
+      }
+    },"json")
+  }
+
+
+</script>
+</body>
+</html>

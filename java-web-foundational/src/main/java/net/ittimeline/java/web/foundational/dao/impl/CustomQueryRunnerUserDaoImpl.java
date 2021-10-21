@@ -1,12 +1,9 @@
 package net.ittimeline.java.web.foundational.dao.impl;
 
 import net.ittimeline.java.web.foundational.dao.UserDao;
-import net.ittimeline.java.web.foundational.entity.User;
+import net.ittimeline.java.web.foundational.bean.entity.User;
 import net.ittimeline.java.web.foundational.util.CustomQueryRunner;
 import net.ittimeline.java.web.foundational.util.DruidDataSourceUtil;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,7 +26,7 @@ public class CustomQueryRunnerUserDaoImpl implements UserDao {
 
 
     @Override
-    public int insert(User user) {
+    public int insert(User user) throws SQLException{
         if (user != null && user.getName() != null && user.getPassword() != null) {
             String sql = "insert into jdbc_user values(null,?,?,now(),now())";
             int row = queryRunner.update(sql, user.getName(), user.getPassword());
@@ -39,7 +36,7 @@ public class CustomQueryRunnerUserDaoImpl implements UserDao {
     }
 
     @Override
-    public int delete(User userCondition) {
+    public int delete(User userCondition)throws SQLException {
         String sql = null;
 
         //根据id删除
@@ -59,7 +56,7 @@ public class CustomQueryRunnerUserDaoImpl implements UserDao {
     }
 
     @Override
-    public int update(User userCondition) {
+    public int update(User userCondition)throws SQLException {
         String sql = null;
         //拼接SQL
         //根据id修改name
@@ -78,7 +75,7 @@ public class CustomQueryRunnerUserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> select(User userCondition) {
+    public List<User> select(User userCondition)throws Exception {
         String sql=null;
 
         //查询所有
@@ -100,6 +97,8 @@ public class CustomQueryRunnerUserDaoImpl implements UserDao {
                 return userList;
             }
         }
+
+
         //根据用户名和密码查询
         else if (null != userCondition && userCondition.getName() != null && userCondition.getPassword() != null) {
             sql = "select id,name,password,create_date,update_date from jdbc_user " +
@@ -113,11 +112,24 @@ public class CustomQueryRunnerUserDaoImpl implements UserDao {
             }
         }
 
+        //根据用户名查询
+        else if (null != userCondition && userCondition.getName() != null) {
+            sql = "select id,name,password,create_date,update_date from jdbc_user " +
+                    "where name = ?" ;
+            User user = queryRunner.queryForObject(sql, User.class, userCondition.getName());
+            if (null!=user){
+                List<User> userList=new ArrayList<>();
+                userList.add(user);
+                return userList;
+
+            }
+        }
+
         return null;
     }
 
     @Override
-    public long count() {
+    public long count() throws SQLException {
         String sql="select count(*) from jdbc_user";
         return queryRunner.queryForType(sql,Long.class);
     }

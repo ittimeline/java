@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>异步请求搜索自动补全</title>
+    <script src="../js/jquery-3.6.0.js"></script>
+
+    <style>
+        #wordsListDiv{
+            display: none;
+        }
+
+        #wordsListTable{
+            width: 505px;
+            border: 1px solid;
+            height: 300px;
+            position: absolute;
+            left: 515px;
+
+
+
+        }
+    </style>
+
+</head>
+
+<body>
+<center>
+<h1>百度一下，你就知道</h1>
+
+<div id="errorMessage" style="color: red"></div>
+
+<div>
+    <input type="text" style="width: 500px;height: 40px" onkeyup="searchWords(this.value)"/>
+</div>
+
+<div id="wordsListDiv">
+    <table id="wordsListTable"  >
+
+    </table>
+</div>
+</center>
+
+<script>
+    /**
+     * 异步请求搜索自动补全
+     * @param keyword
+     */
+    function searchWords(keyword){
+        //如果输入框不是空字符串，表示用户输入了内容
+        if (keyword!=""){
+            //表格所在的div显示在页面上
+            $("#wordsListDiv").show()
+            //         //$.post(请求路径，请求参数，处理响应结果的匿名函数，响应结果的类型默认是text，也就是普通文本类型)
+            $.post("../words","method=search&keyword="+keyword,function (result){
+                //服务端没有异常
+                if (result.flag){
+                    //遍历数据之前先清空表格的数据
+                    $("#wordsListTable").empty()
+
+                    //获取wordsList
+                    let wordsList = result.data;
+
+                    //遍历wordsList
+                    $.each(wordsList,function (index,words){
+                        let word = words.word;
+                        //将每个word添加到表格中
+                        $("#wordsListTable").append("<tr><td>"+word+"</td></tr>")
+
+                    })
+
+
+                }else{
+                    $("#errorMessage").html("网络异常");
+                }
+
+            },"json")
+
+        }else{
+            //输入框的内容为空，搜索提示的表格隐藏
+            $("#wordsListDiv").hide()
+        }
+
+
+    }
+
+</script>
+</body>
+</html>

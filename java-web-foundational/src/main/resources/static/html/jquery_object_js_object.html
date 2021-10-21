@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery对象和js对象的介绍</title>
+<!--  引入外部jQuery的js文件-->
+  <script src="../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<h1>jquery对象和js对象的介绍和相互转换</h1>
+用户名:<input type="text" id="name" value="tony"/>
+
+<script>
+  // js对象
+  let jsObjectInputElement = document.getElementById("name");
+  //js对象获取文本框的值只能通过value属性获取
+  console.log("jsObjectInputElement.value = "+jsObjectInputElement.value)
+  //val()方法只能由jQuery对象使用
+ // console.log("jsObjectInputElement.val() = "+jsObjectInputElement.val())
+  // jquery对象 使用jQuery选择器获取的对象都是jQuery对象吗，jQuery对象的对象名(变量名)都是以$开头，jQuery对象只能操作jQuery对象自己的属性和方法。
+  //通过id选择器获取id为name的元素
+  let $jqueryObjectInputElement = $("#name");
+  //jQuery对象获取文本框的值只能通过val()方法
+  console.log("$jqueryObjectInputElement.val() = "+$jqueryObjectInputElement.val())
+  //value属性只能由js对象使用
+  //console.log("$jqueryObjectInputElement.value = "+$jqueryObjectInputElement.value)
+
+
+  //js对象转换怎么转jQuery对象 $(js对象)
+  $jqueryObjectInputElement = $(jsObjectInputElement);
+  console.log("js对象转jQuery对象")
+  //调用jQuery对象的val()方法
+  console.log("$jqueryObjectInputElement.val() = "+$jqueryObjectInputElement.val())
+
+  //jQuery对象怎么转js对象
+  // jQuery对象的本质就是对象数组，该数组行中每个对象都是js对象，因此可以遍历数组中的元素就可以转换为js对象
+  console.log("$jqueryObjectInputElement.length = "+$jqueryObjectInputElement.length)
+  jsObjectInputElement=$jqueryObjectInputElement[0]
+  console.log("jquery对象转换为js对象")
+  console.log("jsObjectInputElement.value = "+jsObjectInputElement.value)
+
+
+
+
+
+</script>
+</body>
+</html>

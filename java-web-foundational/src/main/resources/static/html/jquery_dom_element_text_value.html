@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery操作标签的文本和值</title>
+  <!--  引入外部jQuery的js文件-->
+  <script src="../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<h1>jQuery操作标签的文本和值</h1>
+
+<input type="text" name="name" id="name" value="tony"/>
+<div id="desc"><h1>跟光磊学Java</h1></div>
+<script>
+
+  //获取文本框的值
+ // $("#")
+  let inputElementValue = $("#name").val();
+  console.log("修改之前的值 inputElementValue = "+inputElementValue)
+
+  //修改文本框的值
+  $("#name").val("jack")
+  inputElementValue = $("#name").val();
+  console.log("修改之后的值 inputElementValue = "+inputElementValue)
+
+  //获取div的全部内容
+  let divHtml = $("#desc").html();
+  console.log("divHtml = "+divHtml)
+
+//获取div的文本内容
+  let divText = $("#desc").text();
+  console.log("divText = "+divText)
+
+
+  $("#desc").html("<h1>跟光磊学前端</h1>")
+  //$("#desc").text("<h1>跟光磊学前端</h1>")
+
+
+</script>
+</body>
+</html>

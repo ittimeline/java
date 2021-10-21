@@ -20,22 +20,6 @@ public class StringTest {
         System.out.println(compareColumnNameFiledName(originColumnName, filedName));
 
 
-        /*//由update_date_time转成updateDateTime
-        String[] splitColumnWordNames = originColumnName.split("_");
-        StringBuffer columnName=new StringBuffer(splitColumnWordNames[0]);
-        for (int i = 1; i < splitColumnWordNames.length; i++) {
-            String splitColumnWordName = splitColumnWordNames[i];
-            char firstCharLower = splitColumnWordName.charAt(0);
-            char firstCharUpper = Character.toUpperCase(firstCharLower);
-            String splitColumnWordNameFirstLetterUpper = splitColumnWordName.replace(firstCharLower, firstCharUpper);
-            columnName.append(splitColumnWordNameFirstLetterUpper);
-        }*/
-
-
-
-
-
-
     }
 
 

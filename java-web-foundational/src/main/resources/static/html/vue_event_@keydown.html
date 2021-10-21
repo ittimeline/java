@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue绑定键盘按下事件</title>
+  <!--  1.引入vue.js-->
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+<!--
+    2.准备vue的视图
+-->
+<div id="app">
+<!--
+  @keydown绑定键盘按下事件
+-->
+
+<!--
+  $event表示当前触发的事件
+-->
+    <input type="text" @keydown="handleKeyDown($event)"   />
+</div>
+
+
+<script>
+  //3.创建Vue对象
+  new Vue({
+    el:"#app", //指定vue的视图
+    data:{ //数据模型
+      content:""
+    },
+    methods:{
+      //处理键盘按下事件
+      handleKeyDown(event){
+        // 需求 在英文输入法的状态下对输入框的内容进行校验，校验规则是使用键盘按下事件，如果按下是0-9的数字就正常显示，如果是其他按键则阻值事件的执行。
+        //通过当前键盘按下事件触发的键码值
+        // 不带数字键盘的按键0 对应的键码值是48， 按键9 对应的键码值是57
+        // 带数字键盘的按键1 对应的键码值35 按键9 对应的键码值是33
+        console.log("当前按键对应的键码值是"+event.keyCode)
+        let keyCode = event.keyCode
+        //不是删除键
+        if(keyCode!=8){
+          //不是0-9之间的按键
+          if (keyCode<48||keyCode>57){
+            //阻止事件
+            event.preventDefault()
+          }
+        }
+
+
+
+      }
+    }
+  })
+
+</script>
+</body>
+</html>

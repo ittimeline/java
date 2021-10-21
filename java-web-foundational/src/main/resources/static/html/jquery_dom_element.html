@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery创建、添加和移除标签</title>
+  <!--  引入外部jQuery的js文件-->
+  <script src="../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<h1>jQuery创建、添加和移除标签</h1>
+
+<ul id="cities">
+  <li id="beijing">北京</li>
+  <li id="shanghai">上海</li>
+  <li id="guangzhou">广州</li>
+  <li id="shenzhen">深圳</li>
+</ul>
+<input type="button" value="添加城市" onclick="addCity()"><br/>
+<input type="button" value="删除城市" onclick="removeCity()"><br/>
+<input type="button" value="清空城市列表" onclick="removeAllCity()"><br/>
+
+<script>
+
+  function addCity(){
+    //创建li标签
+    let $liElement = $("<li id='wuhan'>武汉</li>")
+
+    //添加武汉
+    //append()方法 父标签将创建出来的标签添加到最后 append就是追加的意思
+    //$("#cities").append($liElement)
+
+    //将创建出来的标签添加到最后
+   // $liElement.appendTo($("#cities"))
+
+    // 将创建出来的标签添加到最前面
+    $("#cities").prepend($liElement)
+
+    //在深圳的前面添加苏州
+    $liElement = $("<li id='suzhou'>苏州</li>")
+    $("#shenzhen").before($liElement)
+
+    //在深圳后面添加南京
+    $liElement = $("<li id='nanjing'>南京</li>")
+    $("#shenzhen").after($liElement)
+
+
+  }
+
+
+  function removeCity(){
+    $("#shanghai").remove()
+  }
+
+  function removeAllCity(){
+      //这里会清空ul下的所有li标签，但是会保留ul标签
+    $("#cities").empty()
+  }
+
+</script>
+</body>
+</html>

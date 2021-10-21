@@ -1,7 +1,8 @@
 package net.ittimeline.java.web.foundational.dao;
 
-import net.ittimeline.java.web.foundational.entity.User;
+import net.ittimeline.java.web.foundational.bean.entity.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public interface UserDao {
      * @param user
      * @return
      */
-     int insert(User user);
+     int insert(User user) throws SQLException;
 
 
     /**
@@ -34,7 +35,7 @@ public interface UserDao {
      * @param userCondition
      * @return
      */
-     int delete(User userCondition);
+     int delete(User userCondition) throws SQLException;
 
 
     /**
@@ -43,7 +44,7 @@ public interface UserDao {
      * @param userCondition
      * @return
      */
-     int update(User userCondition);
+     int update(User userCondition) throws SQLException;
 
 
     /**
@@ -51,10 +52,11 @@ public interface UserDao {
      * @param userCondition
      * @return
      */
-     List<User> select(User userCondition);
+     List<User> select(User userCondition) throws Exception;
 
 
-     long count();
+
+     long count() throws SQLException;
 
 
 }

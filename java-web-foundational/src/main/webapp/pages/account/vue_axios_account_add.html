@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue+Axios改造新增账号</title>
+
+    <script src="../../js/axios.js"></script>
+    <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+<h1>Vue+Axios改造新增账号</h1>
+
+<div id="app">
+    <div style="color: red"  v-html="errorMessage"></div>
+
+    <!--
+    onsubmit="return false" 屏蔽表单的同步提交
+    -->
+    <form action="#" method="post" onsubmit="return false" >
+        账户名:<input type="text" name="name" autocomplete="off" v-model="account.name"/> <br/>
+        账户余额: <input type="text" name="balance" autocomplete="off" v-model="account.balance" /> <br/>
+        账号状态:<input type="radio" name="status" value="1" v-model="account.status">启用
+        <input type="radio" name="status" value="0" v-model="account.status">禁用<br/>
+        <input type="submit" value="提交" @click="axiosAddAccount()"/>
+    </form>
+</div>
+
+
+
+<script>
+
+    new Vue({
+        el:"#app",
+        data:{
+            account:{},
+            errorMessage:""
+        },
+        methods:{
+            axiosAddAccount(){
+                axios.post("../../async/account?method=addAccount",this.account).then(response=>{
+                    //添加账号成功
+                    if (response.data.flag){
+                        //跳转到列表页面
+                        location.href="vue_axios_account_list.html"
+                    }else{
+                        this.errorMessage="服务器异常"
+                    }
+                }).catch(error=>{
+                    console.log("服务器异常,异常信息是"+error)
+                    this.errorMessage="服务器异常"
+
+                })
+            }
+        }
+    })
+
+
+</script>
+</body>
+</html>

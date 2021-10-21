@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery事件切换</title>
+  <!--  引入外部jQuery的js文件-->
+  <script src="../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<h1>jQuery事件切换</h1>
+<input type="text" value="" id="txt"/>
+
+<script>
+  // 需求：鼠标移入的时候文本框背景颜色变红色 鼠标移出的时候文本框背景颜色变成橘黄色
+  /*$("#txt").mouseover(function (){
+    $("#txt").css("background-color","red")
+  }).mouseout(function (){
+    $("#txt").css("background-color","orange")
+  })*/
+
+  // hover()方法绑定鼠标移入移出事件
+  $("#txt").hover(function (){
+    $("#txt").css("background-color","red")}
+          ,function (){
+      $("#txt").css("background-color","orange")})
+
+
+</script>
+</body>
+</html>

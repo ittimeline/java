@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery解绑事件</title>
+  <!--  引入外部jQuery的js文件-->
+  <script src="../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<h1>jQuery解绑事件</h1>
+<input type="button" value="按钮" id="btn"  /><br/>
+
+<script>
+  $("#btn").click(function (){
+    alert(" jQuery的匿名函数方式绑定onclick事件  按钮被点击了")
+
+  })
+
+  // JavaScript的匿名函数方式绑定onclick事件
+  document.getElementById("btn").onclick=function (){
+    alert(" JavaScript的匿名函数方式绑定onclick事件  按钮被点击了")
+
+  }
+
+
+  //解绑onclick事件
+  //off方法用于解绑指定类型的事件，如果没有参数，那么就是解绑该元素的所有事件，该方法只能解绑jQuery绑定的事件
+  $("#btn").off("click")
+
+
+</script>
+</body>
+</html>

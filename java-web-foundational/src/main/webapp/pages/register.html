@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <script src="../js/jquery-3.6.0.js"></script>
+
+</head>
+
+<body>
+<!--<div id="message" style="color: red"></div>-->
+<form action="../register" method="post">
+  用户名:<input type="text" name="name"  id="name" onblur="checkName(this.value)" autocomplete="off" />
+    <span id="message"></span> <br/>
+  密码:<input type="password" name="password"  autocomplete="off" /><br>
+  <input type="submit" value="提交"/>
+
+</form>
+
+<script>
+
+    /**
+     * 异步请求服务器校验用户名是否可用
+     */
+    function checkName(name){
+        //$.post(请求路径，请求参数，处理响应结果的匿名函数，响应结果的类型默认是text，也就是普通文本类型)
+        $.post("../user","method=checkName&name="+name,function (result){
+            //处理服务器的响应结果
+            console.log("result = "+result)
+            //服务器没有异常
+            if (result.flag){
+               // $("#message").html("用户名可用")
+                $("#message").html("<img src=\"../images/right.png\" width=\"60px\" height=\"30px\" />")
+
+
+            }else{
+                //服务器有异常
+                $("#message").html(result.errorMessage)
+            }
+        },"json")
+    }
+</script>
+</body>
+</html>

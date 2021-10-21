@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery选择器-基本选择器</title>
+    <!--引入外部的jQuery的js文件-->
+    <script src="../js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+<h1>jQuery选择器-基本选择器</h1>
+<div>跟光磊学Java</div>
+<div>跟光磊学Linux</div>
+<span class="custom_style">跟光磊学前端</span>
+
+<p id="content">好好学习，天天向上</p>
+
+<script>
+
+    console.log("根据id查找元素"+$("#content").text())
+    console.log("根据element查找元素"+$("h1").text())
+    console.log("根据class查找元素"+$(".custom_style").text())
+
+
+</script>
+</body>
+</html>

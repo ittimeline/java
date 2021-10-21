@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue遍历数据</title>
+  <!--  1.引入vue.js-->
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+<!--
+    2.准备vue的视图
+-->
+<div id="app">
+<ul>
+<!--  使用v-for遍历cities-->
+  <h1> 使用v-for遍历cities</h1>
+  <li v-for="(cityName,index) in cities">{{cityName}}</li>
+
+  <h1>使用v-for遍历accountList</h1>
+  <table>
+    <thead>
+      <td>账号编号</td>
+      <td>账号名称</td>
+      <td>账号余额</td>
+      <td>账号状态</td>
+    </thead>
+
+    <tr v-for="(account,index) in accountList" >
+      <td>{{index+1}}</td>
+      <td>{{account.name}}</td>
+      <td>{{account.balance}}</td>
+      <td>{{account.status}}</td>
+    </tr>
+
+  </table>
+</ul>
+</div>
+<script>
+  //创建Vue对象
+  new Vue({
+    el:"#app", //指定vue的视图
+    data:{ //数据模型
+      cities:["北京","上海","广州","深圳"],
+      accountList:[{
+        name:"tony",
+        balance:100,
+        status:"启用"
+      },{
+        name:"jack",
+        balance:200,
+        status:"启用"
+      },{
+        name:"tom",
+        balance:1000,
+        status:"禁用"
+      }]
+
+    }
+  })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue绑定标签体的内容</title>
+  <script src="../js/vue.js"></script>
+
+</head>
+
+<body>
+<h1>Vue绑定标签体的内容</h1>
+<div id="app">
+<!--  使用差值表达式展示数据-->
+<!--  <div>{{red}}</div>-->
+<!--  使用v-text展示数据 只能展示文本数据-->
+  <div v-text="red" style="color: red"></div>
+  <div v-html="currentPageNo==12?redPageNo:currentPageNo"  ></div>
+
+</div>
+<script>
+    let pageNo=128
+  new Vue({
+
+    el:"#app", //vue的视图
+    data:{ //数据模型
+      red:"red color",
+      orange: "<h1>orange color</h1>",
+      redPageNo:"<span style='color: red'>"+pageNo+"</span>",
+      currentPageNo: pageNo
+
+    }
+  })
+
+
+
+</script>
+</body>
+</html>
