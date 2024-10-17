@@ -1,0 +1,68 @@
+package net.ittimeline.java.core.foundational.control.loop.breakstatement;
+
+import java.util.Scanner;
+
+/**
+ * 判断质数
+ * 需求：要求用户从键盘输入一个大于1的正整数，判断该正整数是不是质数
+ * 分析：如果一个自然数（大于1）只能被1和本身整除，那么就是质数，否则就是合数
+ * 例如 3是质数 因为只有1 * 3 = 3，即3只能被1和3整除
+ * 4是合数 因为除了 1 * 4 = 4以外，还有2 * 2 = 4，即4除了能被1和4整除，还能被2整除
+ * 9是合数，因为除了1 * 9 = 9以外，还有3 * 3 = 9，即9除了能被1和9整除，还能被3整除
+ * <p>
+ * 实现方式2
+ *
+ * @author tony 18601767221@163.com
+ * @version 2024/10/17 20:14
+ * @since Java21
+ */
+public class JudgeIsPrimeNumberV2 {
+    public static void main(String[] args) {
+        //创建Scanner对象
+        //System.in 标准输入 也就是键盘输入
+        //Scanner对象可以扫描用户从键盘输入的数据
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入一个正整数");
+        int number = scanner.nextInt();
+        //定义一个布尔变量表示标记
+        //标记number是质数
+        boolean isPrimeNumber = true;
+        int count = 0;
+        /*
+            81是合数，因为除了1 * 81 = 81以外，还有3 * 27 = 81，以及 9 * 9 = 81，
+            以81的平方根9为中心
+            假设 a * b = 81
+            那么a和b，其中有一个必定小于等于9，另外一个大于等于9
+            假设都是大于9，那么9.1 * 9.1 > 81
+            假设都是小于9， 那么8.9 * 8.9 < 81
+            因此 其中一个数字小于等于平方根9，另外一个数字大于等于9
+
+            假设number是8753，那么从2到number-1循环8751次，
+            而8751的平方根是93，从2到number的平方根只需循环91次
+            减少循环次数，可以大大提高程序性能
+            Math.sqrt(number) 表示求number的平方根，例如number是9，那么Math.sqrt(number)就是3
+         */
+        //2到number的平方根范围内遍历
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            count++;
+            //i依次表示2到number的平方根这个范围的每个数字
+            //如果number能被2到number的平方根这个范围内的任何一个数整除
+            if (number % i == 0) {
+                //number不是质数
+                isPrimeNumber = false;
+                //2到number的平方根这个范围的其他数据不需要再判断，结束循环
+                break;
+            }
+        }
+        System.out.println("方式2：循环次数" + count + "次");
+        //循环结束表示2到number的平方根范围内的所有数字都已经判断完毕
+        //根据标记判断number是否是质数
+        if (isPrimeNumber) {
+            System.out.println(number + "是质数");
+        } else {
+            System.out.println(number + "不是质数");
+        }
+        //关闭Scanner
+        scanner.close();
+    }
+}

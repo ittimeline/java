@@ -10,7 +10,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>java-core</module>
-        <module>java-core/java-core-foundational/java-core-foundational-syntax</module>
     </modules>
 
     <properties>
