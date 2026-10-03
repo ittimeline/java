@@ -1,0 +1,16 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Maven
+target/
+
+# XCodeMap
+.xcodemap/
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
+
+# Logs
+*.log
