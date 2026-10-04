@@ -253,7 +253,9 @@ irm ckey.run|iex
 
 ![文件和代码模板设置](assets/images/IntelliJ%20IDEA文件和代码模板设置.png)
 
+6. 保存操作
 
+![保存操作](assets/images/保存操作.png)
 
 ### IntelliJ IDEA 集成Maven
 
