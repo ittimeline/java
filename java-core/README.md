@@ -1,7 +1,7 @@
 # 环境配置
 
 | 软件  | 版本                   |
-| ----- | ---------------------- |
+|-------|------------------------|
 | OS    | Windows 11 2026 H2     |
 | JDK   | Java 25.0.4.1          |
 | IDE   | IntelliJ IDEA 2026.2.3 |
@@ -10,8 +10,6 @@
 
 ***
 
-
-
 ## Java
 
 ### Java官网和官方文档
@@ -19,8 +17,6 @@
 Java官网 https://www.oracle.com/java/
 
 ![Java官网](assets/images/Java官网.png)
-
-
 
 https://docs.oracle.com/en/java/javase/25/
 
@@ -39,8 +35,6 @@ https://docs.oracle.com/en/java/javase/25/
 3. 验证Java环境
 
 ![验证Java环境](assets/images/验证Java环境.png)
-
-
 
 ## Maven
 
@@ -69,19 +63,21 @@ https://docs.oracle.com/en/java/javase/25/
 1. 本地仓库配置
 
 ```xml
-  <localRepository>D:\soft\java\maven-repository</localRepository>
+
+<localRepository>D:\soft\java\maven-repository</localRepository>
 
 ```
 
 2. 阿里云镜像仓库[配置](https://maven.aliyun.com/mvn/guide)
 
 ```xml
-     <mirror>
-      <id>aliyunmaven</id>
-      <mirrorOf>*</mirrorOf>
-      <name>阿里云公共仓库</name>
-      <url>https://maven.aliyun.com/repository/public</url>
-    </mirror>
+
+<mirror>
+    <id>aliyunmaven</id>
+    <mirrorOf>*</mirrorOf>
+    <name>阿里云公共仓库</name>
+    <url>https://maven.aliyun.com/repository/public</url>
+</mirror>
 ```
 
 ## Git
@@ -108,17 +104,22 @@ git config --global user.name "ittimeline"
 git config --global user.email "ittimelinedotnet@gmail.com"
 ```
 
-
-
 ### 配置换行符
 
 ```shell
 git config --global core.autocrlf true
 ```
 
-
-
 ![配置Git的用户名、邮箱和换行符](assets/images/配置Git的用户名、邮箱和换行符.png)
+
+## 配置全局代理
+
+```shell
+git config --global http.proxy http://127.0.0.1:7899
+git config --global https.proxy https://127.0.0.1:7899
+```
+
+![image-20261005165829385](assets/images/Git配置全局代理.png)
 
 ## IntelliJ IDEA
 
@@ -127,8 +128,6 @@ git config --global core.autocrlf true
 IntelliJ IDEA 官网 https://www.jetbrains.com/idea/
 
 ![IntelliJ IDEA 官网](assets/images/IntelliJ%20IDEA官网.png)
-
-
 
 IntelliJ IDEA 官方文档 https://www.jetbrains.com/help/idea/getting-started.html
 
@@ -199,8 +198,6 @@ IntelliJ IDEA 官方文档 https://www.jetbrains.com/help/idea/getting-started.h
 
 ```
 
-
-
 ### IntelliJ IDEA 激活
 
 https://ckey.run/
@@ -215,15 +212,11 @@ irm ckey.run|iex
 
 ![Windows版IntelliJ IDEA激活](assets/images/Windows版IntelliJ%20IDEA激活.png)
 
-
-
 ### IntelliJ IDEA 常用设置
 
 1. 外观字体
 
 ![外观字体](assets/images/IntelliJ%20IDEA%20外观字体.png)
-
-
 
 2. 编辑器字体
 
@@ -241,15 +234,13 @@ irm ckey.run|iex
 
 ```java
 /**
-* ${description}
-* 
-* @author tony 18601767221@163.com
-* @version ${DATE} ${TIME}
-* @since Java 25
-*/
+ * ${description}
+ *
+ * @author tony 18601767221@163.com
+ * @version ${DATE} ${TIME}
+ * @since Java 25
+ */
 ```
-
-
 
 ![文件和代码模板设置](assets/images/IntelliJ%20IDEA文件和代码模板设置.png)
 
