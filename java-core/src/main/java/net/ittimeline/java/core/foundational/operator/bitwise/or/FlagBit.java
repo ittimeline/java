@@ -1,7 +1,7 @@
 package net.ittimeline.java.core.foundational.operator.bitwise.or;
 
 /**
- * 按位或应用案例：
+ * 按位或应用案例：标志位设置
  * 请将 0 这个数字中第 2、4、6 位的二进制位设置为 1。
  * 这属于标志位设置的具体应用。
  *

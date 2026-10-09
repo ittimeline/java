@@ -3,7 +3,7 @@ package net.ittimeline.java.core.foundational.operator.arithmetic;
 import java.util.Scanner;
 
 /**
- * 计算圆的面积
+ * 算术运算符案例7-计算圆的面积
  *
  * @author tony 18601767221@163.com
  * @version 2026/10/5 16:29

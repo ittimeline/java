@@ -3,7 +3,7 @@ package net.ittimeline.java.core.foundational.control.loop.whileloop;
 import java.util.Scanner;
 
 /**
- * while循环案例3-n的阶乘
+ * while循环案例4-n的阶乘
  * 需求：提示用户从键盘输入一个非负整数 n，计算并输出 n!。
  * <pre>
  * n! = n × (n-1) × (n-2) × ... × 2 × 1
